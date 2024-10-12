@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GetAnimePage } from "../services/animePage/queries";
 
 import React from "react";
+import { Navbar } from "../components/navbar/Navbar";
 
 const HomePage = () => {
   const { loading, error, data } = useQuery(GetAnimePage, {
@@ -11,7 +12,16 @@ const HomePage = () => {
 
   if (loading) return <p>Loading...</p>;
   const animeList = data?.Page?.media;
-  return <div>{animeList?.map((anime) => anime?.title?.english)}</div>;
+ return (
+  <div style={{backgroundColor:'#fff'}}>
+  <Navbar></Navbar>
+  <div>
+    {
+
+    }
+  </div>
+  </div>
+ )
 };
 
 export default HomePage;
