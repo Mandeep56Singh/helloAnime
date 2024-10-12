@@ -1,4 +1,5 @@
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   AppBar,
   Box,
@@ -7,10 +8,22 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-export const Navbar = () => {
-  return (
+import { useState } from "react";
+import { theme } from "../../theme/theme";
+import SearchBar from "../searcbar/Searchbar";
 
-      <AppBar position={"sticky"} aria-label="navbar">
+export const Navbar = () => {
+  const [searchToggle, setSearchToggle] = useState<boolean>(false);
+
+  return (
+    <Box>
+      <AppBar
+        position={"sticky"}
+        aria-label="navbar"
+        sx={{
+          boxShadow: "none",
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -21,12 +34,40 @@ export const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant={"h5"} component={"div"} sx={{ flexGrow: 1 }}>
-            Hello!Anime
+          <Typography
+            variant={"h4"}
+            component={"div"}
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+             
+            }}
+          >
+            hello
+            <Box color={theme.palette.text.secondary}>!</Box>
+            anime
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton onClick={() => setSearchToggle((s) => !s)}>
+            <SearchIcon
+              sx={{
+                color: searchToggle ? "secondary.main" : "#FFF",
+                mr:"5px"
+              }}
+            ></SearchIcon>
+          </IconButton>
+
+          <Button
+            sx={{
+              background: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+            }}
+          >
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
-    // </Box>
+
+      {searchToggle ? <SearchBar></SearchBar> : null}
+    </Box>
   );
 };
