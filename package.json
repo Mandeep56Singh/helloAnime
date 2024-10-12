@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "push": "npx conventional-commit"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -35,6 +36,7 @@
     "@graphql-codegen/cli": "5.0.3",
     "@graphql-codegen/client-preset": "4.4.0",
     "@graphql-codegen/introspection": "4.0.3",
+    "@open-sauced/conventional-commit": "^1.0.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
