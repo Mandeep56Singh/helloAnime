@@ -10,8 +10,10 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#FFBADE",
+      light: "#FFF",
       contrastText: "#000",
     },
+
     background: {
       default: "#2D2B44",
       paper: "#999999",
@@ -26,6 +28,9 @@ export const theme = createTheme({
     },
   },
 
+  shape: {
+    borderRadius: 4,
+  },
   typography: {
     fontFamily: ["Poppins", "Robots", "sans-serif"].join(","),
     // Header sizes (h1-h6)
