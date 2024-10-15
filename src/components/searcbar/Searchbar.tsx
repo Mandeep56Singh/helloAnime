@@ -8,7 +8,8 @@ import {
   Paper,
 } from "@mui/material";
 import { Box, styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import SearchResult from "./SearchResult";
 
 const SearchBarContainer = styled(Paper)(({ theme }) => ({
   display: "flex",
@@ -38,46 +39,60 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
 }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
-
+  const [toogleSearchResult, setToogleSearchResult] = useState<boolean>(false);
   const handleSearch = () => {
     if (onSearch) {
       onSearch(searchQuery);
     }
   };
 
+  const searchQueryHandler = (searchString: string) => {
+    setSearchQuery(searchString);
+    if (searchString.trim().length > 2) {
+      setToogleSearchResult(true);
+    } else {
+      setToogleSearchResult(false);
+    }
+  };
+
   return (
-    <SearchBarContainer>
-      <Button
-        variant="contained"
-        type="button"
-        aria-label="filter"
-        onClick={handleSearch}
-        sx={{
-          backgroundColor: "background.paper",
-        }}
-      >
-        <FilterAltIcon />
-      </Button>
-      <Box></Box>
-      <StyledInputBase
-        placeholder={placeholder}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        inputProps={{ "aria-label": "search" }}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              type="button"
-              aria-label="search"
-              onClick={handleSearch}
-              color="inherit"
-            >
-              <SearchIcon />
-            </IconButton>
-          </InputAdornment>
-        }
-      />
-    </SearchBarContainer>
+    <Box>
+      <SearchBarContainer>
+        <Button
+          variant="contained"
+          type="button"
+          aria-label="filter"
+          onClick={handleSearch}
+          sx={{
+            backgroundColor: "background.paper",
+          }}
+        >
+          <FilterAltIcon />
+        </Button>
+        <Box></Box>
+        <StyledInputBase
+          placeholder={placeholder}
+          value={searchQuery}
+          onChange={(e) => searchQueryHandler(e.target.value)}
+          inputProps={{ "aria-label": "search" }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                type="button"
+                aria-label="search"
+                onClick={handleSearch}
+                color="inherit"
+              >
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </SearchBarContainer>
+      {toogleSearchResult ? (
+        <SearchResult searchQuery={searchQuery}></SearchResult>
+      ) : null}
+    </Box>
   );
 };
 
