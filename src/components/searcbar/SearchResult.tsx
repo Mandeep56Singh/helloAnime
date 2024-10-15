@@ -94,7 +94,9 @@ const SearchAnimeItem: React.FC<animeItemProps> = ({ data }) => {
   );
 };
 const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
+  console.log(searchQuery,"search value for searchResult");
   const { loading, error, data } = useQuery(SearchAnime, {
+    skip: !searchQuery || searchQuery.trim().length <= 2,
     variables: { search: searchQuery, type: "ANIME" },
   });
   if (loading) {

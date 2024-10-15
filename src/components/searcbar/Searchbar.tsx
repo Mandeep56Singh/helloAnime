@@ -8,7 +8,8 @@ import {
   Paper,
 } from "@mui/material";
 import { Box, styled } from "@mui/system";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 import SearchResult from "./SearchResult";
 
 const SearchBarContainer = styled(Paper)(({ theme }) => ({
@@ -29,6 +30,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   paddingLeft: 10,
   paddingBlock: 2,
 }));
+
 type SearchBarProps = {
   placeholder?: string;
   onSearch?: (query: string) => void;
@@ -38,21 +40,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search...",
   onSearch,
 }) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [toogleSearchResult, setToogleSearchResult] = useState<boolean>(false);
-  const handleSearch = () => {
-    if (onSearch) {
-      onSearch(searchQuery);
-    }
-  };
+  const [searchQuery, setSearchQuery] = useState("");
+  const debounceSearch = useDebounce(searchQuery);
+  const [showSearchResult, setShowSearchResult] = useState(false);
 
-  const searchQueryHandler = (searchString: string) => {
-    setSearchQuery(searchString);
-    if (searchString.trim().length > 2) {
-      setToogleSearchResult(true);
+  useEffect(() => {
+    // Only show results if there's a valid search query
+    if (debounceSearch.trim().length > 2) {
+      setShowSearchResult(true);
+      if (onSearch) onSearch(debounceSearch);
     } else {
-      setToogleSearchResult(false);
+      setShowSearchResult(false);
     }
+  }, [debounceSearch, onSearch]);
+
+  const handleSearch = () => {
+    if (onSearch) onSearch(searchQuery);
   };
 
   return (
@@ -63,17 +66,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
           type="button"
           aria-label="filter"
           onClick={handleSearch}
-          sx={{
-            backgroundColor: "background.paper",
-          }}
         >
           <FilterAltIcon />
         </Button>
-        <Box></Box>
         <StyledInputBase
           placeholder={placeholder}
           value={searchQuery}
-          onChange={(e) => searchQueryHandler(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
           inputProps={{ "aria-label": "search" }}
           endAdornment={
             <InputAdornment position="end">
@@ -81,7 +80,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 type="button"
                 aria-label="search"
                 onClick={handleSearch}
-                color="inherit"
               >
                 <SearchIcon />
               </IconButton>
@@ -89,9 +87,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           }
         />
       </SearchBarContainer>
-      {toogleSearchResult ? (
-        <SearchResult searchQuery={searchQuery}></SearchResult>
-      ) : null}
+      {showSearchResult && <SearchResult searchQuery={debounceSearch} />}
     </Box>
   );
 };
