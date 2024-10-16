@@ -10,7 +10,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { MediafieldsFragment } from "../../graphql/types/graphql";
+import {
+  MediafieldsFragment,
+  SearchAnimeQuery,
+  SearchAnimeQueryVariables,
+} from "../../graphql/types/graphql";
 import { SearchAnime } from "../../services/search/queries";
 type SearchResultProps = {
   searchQuery: string;
@@ -94,11 +98,15 @@ const SearchAnimeItem: React.FC<animeItemProps> = ({ data }) => {
   );
 };
 const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
-  console.log(searchQuery,"search value for searchResult");
-  const { loading, error, data } = useQuery(SearchAnime, {
+  console.log(searchQuery, "search value for searchResult");
+  const { loading, error, data } = useQuery<
+    SearchAnimeQuery,
+    SearchAnimeQueryVariables
+  >(SearchAnime, {
     skip: !searchQuery || searchQuery.trim().length <= 2,
     variables: { search: searchQuery, type: "ANIME" },
   });
+
   if (loading) {
     return (
       <Box
@@ -135,16 +143,19 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
       </Box>
     );
   } else if (data) {
+    const media = data?.Media as MediafieldsFragment;
+    const remainingMediaItem = data?.Media?.relations?.nodes as unknown as MediafieldsFragment
     const firstItem = {
-      id: data?.Media?.id,
-      title: data?.Media?.title,
-      coverImage: data?.Media?.coverImage,
-      format: data?.Media?.format,
-      status: data?.Media?.status,
-      episodes: data?.Media?.episodes,
-      duration: data?.Media?.duration,
-    };
-    const result = [firstItem, ...(data?.Media?.relations?.nodes || "")];
+          id: media.id,
+          title: media.title,
+          coverImage: media.coverImage,
+          format: media.format,
+          status: media.status,
+          episodes: media.episodes,
+          duration: media.duration,
+        };
+
+    const result:MediafieldsFragment[] = [firstItem, ...remainingMediaItem || []];
 
     return (
       <>

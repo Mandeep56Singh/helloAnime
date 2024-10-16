@@ -1,6 +1,5 @@
-import { graphql } from "../../graphql/types";
-import {gql} from "@apollo/client"
-export const MediaFields = gql(`
+import { gql } from '@apollo/client'
+export const MediaFields = gql`
   fragment mediafields on Media {
     id
     title {
@@ -15,4 +14,4 @@ export const MediaFields = gql(`
     episodes
     format
   }
-`);
+`;

@@ -1,19 +1,23 @@
-
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "./src/graphql/schema.graphql",
+  schema: "https://graphql.anilist.co",
   documents: "src/services/**/*.ts",
   generates: {
     "./src/graphql/types/": {
       preset: "client",
-      plugins: []
+      plugins: [
+        "typescript", // Generates TypeScript types
+        "typescript-operations",
+        "typed-document-node",
+      ],
+      presetConfig: {
+        gqlTagName: "gql",
+      },
     },
-    "./graphql.schema.json": {
-      plugins: ["introspection"]
-    }
-  }
+  },
+  ignoreNoDocuments: true,
 };
 
 export default config;

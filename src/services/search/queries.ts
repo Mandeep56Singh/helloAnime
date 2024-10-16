@@ -1,37 +1,15 @@
-import { graphql } from "../../graphql/types/gql";
+import { gql } from "@apollo/client";
 import { MediaFields } from "./mediafields";
-import {gql} from "@apollo/client"
-export const SearchAnime = graphql(`
+export const SearchAnime = gql`
+  ${MediaFields}
   query SearchAnime($search: String, $type: MediaType!) {
     Media(search: $search, type: $type) {
-     id
-    title {
-      english
-      romaji
-    }
-    coverImage {
-      medium
-    }
-    duration
-    status
-    episodes
-    format
+      ...mediafields
       relations {
         nodes {
-        id
-    title {
-      english
-      romaji
-    }
-    coverImage {
-      medium
-    }
-    duration
-    status
-    episodes
-    format
+          ...mediafields
         }
       }
     }
   }
-`);
+`;
