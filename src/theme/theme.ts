@@ -18,11 +18,18 @@ export const theme = createTheme({
       default: "#2D2B44",
       paper: "#999999",
     },
+    spacing: {
+      textPadding: "4px 8px",
+    },
     text: {
       primary: "#fff",
       secondary: "#FFBADE",
       disabled: "#AAAAAA",
+      dark: {
+        primary: "#000",
+      },
     },
+
     action: {
       hover: "#FFBADE",
     },
@@ -109,6 +116,15 @@ export const theme = createTheme({
       fontWeight: 700,
       textTransform: "uppercase",
       lineHeight: 1.75,
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 479,
+      md: 759,
+      lg: 1023,
+      xl: 1400,
     },
   },
 });
