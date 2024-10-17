@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { theme } from "../../theme/theme";
-import SearchBar from "../searcbar/Searchbar";
+import SearchBar from "../search/Searchbar";
 
 export const Navbar = () => {
   const [searchToggle, setSearchToggle] = useState<boolean>(false);

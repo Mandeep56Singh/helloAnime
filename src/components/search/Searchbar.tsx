@@ -8,7 +8,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Box, styled } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import SearchResult from "./SearchResult";
 
@@ -43,7 +43,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
   const debounceSearch = useDebounce(searchQuery);
   const [showSearchResult, setShowSearchResult] = useState(false);
-
+  const inputRef = useRef<HTMLInputElement>();
   useEffect(() => {
     // Only show results if there's a valid search query
     if (debounceSearch.trim().length > 2) {
@@ -72,6 +72,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <StyledInputBase
           placeholder={placeholder}
           value={searchQuery}
+          ref={inputRef}
           onChange={(e) => setSearchQuery(e.target.value)}
           inputProps={{ "aria-label": "search" }}
           endAdornment={
