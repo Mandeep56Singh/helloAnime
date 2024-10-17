@@ -8,13 +8,18 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { theme } from "../../theme/theme";
 import SearchBar from "../search/Searchbar";
+import { useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [searchToggle, setSearchToggle] = useState<boolean>(false);
+  const location  = useLocation();
 
+  useEffect(() => {
+    setSearchToggle(false);
+  },[location])
   return (
     <Box>
       <AppBar

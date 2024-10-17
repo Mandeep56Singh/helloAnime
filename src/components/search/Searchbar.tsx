@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
 import SearchResult from "./SearchResult";
 
@@ -44,6 +45,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const debounceSearch = useDebounce(searchQuery);
   const [showSearchResult, setShowSearchResult] = useState(false);
   const inputRef = useRef<HTMLInputElement>();
+
+  const location = useLocation();
+
   useEffect(() => {
     // Only show results if there's a valid search query
     if (debounceSearch.trim().length > 2) {
@@ -54,6 +58,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   }, [debounceSearch, onSearch]);
 
+  useEffect(() => {
+    setSearchQuery("");
+    setShowSearchResult(false);
+  }, [location]);
+  
   const handleSearch = () => {
     if (onSearch) onSearch(searchQuery);
   };
