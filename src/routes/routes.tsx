@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Layout from "../components/layout/Layout";
+import AnimePage from "../pages/AnimePage";
 import DubbedAnimePage from "../pages/DubbedAnimePage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
@@ -6,37 +8,47 @@ import HomePage from "../pages/HomePage";
 import MoviesPage from "../pages/MoviesPage";
 import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TVSeriesPage from "../pages/TVSeriesPage";
+import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 
 const routes = createBrowserRouter([
   {
-    path: "/home",
-    element: <HomePage></HomePage>,
+    path: "", // This makes the homepage accessible at localhost:3000
+    element: <Layout></Layout>,
     errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/subbed-anime",
-    element: <SubbedAnimePage></SubbedAnimePage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/dubbed-anime",
-    element: <DubbedAnimePage></DubbedAnimePage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/movies",
-    element: <MoviesPage></MoviesPage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/genre",
-    element: <GenrePage></GenrePage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/tv-series",
-    element: <TVSeriesPage></TVSeriesPage>,
-    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <HomePage></HomePage>,
+      },
+      {
+        path: "subbed-anime",
+        element: <SubbedAnimePage></SubbedAnimePage>,
+      },
+      {
+        path: "dubbed-anime",
+        element: <DubbedAnimePage></DubbedAnimePage>,
+      },
+      {
+        path: "movies",
+        element: <MoviesPage></MoviesPage>,
+      },
+      {
+        path: "genre",
+        element: <GenrePage></GenrePage>,
+      },
+      {
+        path: "tv-series",
+        element: <TVSeriesPage></TVSeriesPage>,
+      },
+      {
+        path: "/search-result/:searchQuery",
+        element: <ViewAllSearchResultPage></ViewAllSearchResultPage>,
+      },
+      {
+        path: "anime/:id",
+        element: <AnimePage></AnimePage>,
+      },
+    ],
   },
 ]);
 
