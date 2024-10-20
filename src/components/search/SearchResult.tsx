@@ -71,7 +71,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
     const firstItem = {
       id: media.id,
       title: media.title,
-      coverImage: media.coverImage,
+      coverImage: media.coverImage?.extraLarge,
       format: media.format,
       status: media.status,
       episodes: media.episodes,

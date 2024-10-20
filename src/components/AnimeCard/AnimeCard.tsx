@@ -1,89 +1,131 @@
+import MovieIcon from "@mui/icons-material/Movie";
 import {
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { green } from "@mui/material/colors";
-import { Box, Stack, styled } from "@mui/system";
+import { Box, Stack } from "@mui/system";
 import React from "react";
+import { Link } from "react-router-dom";
 import { MediafieldsFragment } from "../../graphql/types/graphql";
-
 type AnimeCardProps = {
   data: MediafieldsFragment;
 };
-
-const ResponsiveCard = styled(Card)(({ theme }) => ({
-  width: "calc(25% - 1rem)",
-
-  // Apply media queries
-  [theme.breakpoints.down("xl")]: {
-    width: "calc(25% - 1rem)",
-  },
-  [theme.breakpoints.down("lg")]: {
-    width: "calc(25% - 1rem)",
-  },
-  [theme.breakpoints.down("md")]: {
-    width: "calc(33.33% - 1rem)",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "calc(50% - 1rem)",
-  },
-}));
-
 const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
   const minutes = data.duration || 0;
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
-  const timeDuration = `${hours}hr ${remainingMinutes}min`;
+
+  const timeDuration =
+    hours === 0
+      ? `${remainingMinutes}min`
+      : `${hours}hr ${remainingMinutes}min`;
   return (
-    <ResponsiveCard>
-      <CardActionArea>
+    <Card
+      elevation={0}
+      sx={{
+        borderRadius: "0",
+      }}
+    >
+      <>
         <Box position={"relative"}>
-          <CardMedia
-            component={"img"}
-            image={`${data.coverImage?.medium}`}
-            alt="Anime-Card"
-          />
-          <Box
+          <Link to={`/anime/${data.id}`}>
+            <CardMedia
+              component={"img"}
+              image={`${data.coverImage?.large}`}
+              alt="Anime-Card"
+              sx={{
+                cursor: "pointer",
+                aspectRatio: "0.7",
+              }}
+            />
+          </Link>
+          <Stack
+            direction={"row"}
+            spacing={"4px"}
+            alignItems={"center"}
+            justifyContent={"start"}
             sx={{
               position: "absolute",
               bottom: 20,
               left: 10,
-              backgroundColor: `${green[600]}`,
-              padding: "spacing.textPadding",
-              borderRadius: "shape.borderRadius",
+              backgroundColor: `${green[200]}`,
+              padding: "2px 6px",
+              borderRadius: "4px",
             }}
           >
-            <Typography variant="h6" color="text.dark.primary">
+            <MovieIcon
+              sx={{
+                width: "12px",
+                color: "black",
+              }}
+            ></MovieIcon>
+            <Typography
+              variant="button"
+              color="text.dark.primary"
+              sx={{
+                fontSize: "12px",
+              }}
+            >
               {data.episodes}
             </Typography>
-          </Box>
+          </Stack>
         </Box>
-        <CardContent>
-          <Stack direction={"column"} spacing={3}>
-            <Typography variant="h5">
+        <CardContent
+          component={"div"}
+          sx={{
+            backgroundColor: "primary.dark",
+            padding: "8px 0px",
+            overflow: "hidden",
+          }}
+        >
+          <Stack
+            sx={{
+              overflow: "hidden",
+            }}
+          >
+            <Typography
+              component={Link}
+              to={`/anime/${data.id}`}
+              variant="subtitle1"
+              noWrap
+              sx={{
+                textDecoration: "none",
+                color: "text.primary",
+                "&:hover": {
+                  color: "text.secondary",
+                },
+              }}
+            >
               {data.title?.english || data.title?.romaji}
             </Typography>
-            <Stack direction={"row"} spacing={2}>
-              <Typography variant="caption" color="text.disabled">
-                {data.format}
+          </Stack>
+          <Stack
+            direction={"row"}
+            spacing={1}
+            sx={{
+              overflow: "hidden",
+            }}
+          >
+            <Typography variant="caption" color="text.disabled">
+              {data.format}
+            </Typography>
+            <Typography variant="caption" color="text.disabled">
+              {data.status}
+            </Typography>
+            {data.format?.toLowerCase() != "anime" ||
+            data.format?.toLowerCase() != "manga" ? (
+              <Typography variant="caption" color="text.disabled" noWrap>
+                {timeDuration}
               </Typography>
-              <Typography variant="caption" color="text.disabled">
-                {data.status}
-              </Typography>
-              {data.format?.toLowerCase() != "anime" ||
-              data.format?.toLowerCase() != "manga" ? (
-                <Typography variant="caption" color="text.disabled">
-                  {timeDuration}
-                </Typography>
-              ) : null}
-            </Stack>
+            ) : null}
           </Stack>
         </CardContent>
-      </CardActionArea>
-    </ResponsiveCard>
+      </>
+    </Card>
   );
 };
 

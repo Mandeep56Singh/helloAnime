@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 export const MediaFields = gql`
   fragment mediafields on Media {
     id
@@ -7,6 +7,7 @@ export const MediaFields = gql`
       romaji
     }
     coverImage {
+      large
       medium
     }
     duration

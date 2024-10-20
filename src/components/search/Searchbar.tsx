@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
 import SearchResult from "./SearchResult";
 
@@ -47,6 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const inputRef = useRef<HTMLInputElement>();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Only show results if there's a valid search query
@@ -64,7 +65,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
   }, [location]);
   
   const handleSearch = () => {
-    if (onSearch) onSearch(searchQuery);
+    const value = searchQuery.trim();
+    console.log(value);
+    if(value && (value.length > 2)) {
+      navigate(`search-result/${value}`);
+    }
   };
 
   return (

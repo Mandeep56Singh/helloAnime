@@ -6,7 +6,12 @@ const Layout = () => {
   return (
     <Box>
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <Box sx={{
+        py:4,
+        px:2
+      }}>
+        <Outlet></Outlet>
+      </Box>
     </Box>
   );
 };
