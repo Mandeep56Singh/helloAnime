@@ -59,12 +59,12 @@ const AnimePage = () => {
             lg: "row",
           }}
         >
-          <Box>
+          <Stack direction={"column"} spacing={2}>
             <Typography variant="h3" color="text.secondary">
               Recommended for you
             </Typography>
             <AnimeCardGrid AnimeList={recommendedAnimeData}></AnimeCardGrid>
-          </Box>
+          </Stack>
         </Stack>
       </Box>
     );
