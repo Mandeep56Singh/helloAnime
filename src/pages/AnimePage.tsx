@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import AnimeInfoCard from "../components/AnimePage/AnimeInfoCard";
 import AnimeMetaData from "../components/AnimePage/AnimeMetaData";
+import AnimeCardGrid from "../components/layout/AnimeCardGrid";
 import {
   GetAnimeByIdQuery,
   GetAnimeByIdQueryVariables,
+  MediafieldsFragment,
 } from "../graphql/types/graphql";
 import { animePage } from "../services/animePage/queries";
 const AnimePage = () => {
@@ -21,6 +23,12 @@ const AnimePage = () => {
     return <div>Loading</div>;
   } else if (data) {
     const animeData = data.Media!;
+    const recommendedAnime = data.Media?.recommendations?.edges;
+
+    const recommendedAnimeData: MediafieldsFragment[] | null | undefined =
+      recommendedAnime?.map(
+        (anime) => anime?.node?.mediaRecommendation
+      ) as MediafieldsFragment[];
 
     return (
       <Box
@@ -44,6 +52,19 @@ const AnimePage = () => {
         >
           <AnimeInfoCard data={animeData}></AnimeInfoCard>
           <AnimeMetaData data={animeData}></AnimeMetaData>
+        </Stack>
+        <Stack
+          direction={{
+            xs: "column",
+            lg: "row",
+          }}
+        >
+          <Box>
+            <Typography variant="h3" color="text.secondary">
+              Recommended for you
+            </Typography>
+            <AnimeCardGrid AnimeList={recommendedAnimeData}></AnimeCardGrid>
+          </Box>
         </Stack>
       </Box>
     );
