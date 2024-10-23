@@ -16,6 +16,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  \n  query getAnimeById($mediaId: Int) {\n    Media(id: $mediaId) {\n      id\n      title {\n        english\n        romaji\n      }\n      description\n      coverImage {\n        color\n        extraLarge\n        large\n      }\n      type\n      episodes\n      genres\n      status\n      duration\n      updatedAt\n      trending\n      format\n      averageScore\n      startDate {\n        day\n        month\n        year\n      }\n      endDate {\n        day\n        month\n        year\n      }\n      relations {\n        edges {\n          relationType\n          node {\n            ...mediafields\n          }\n        }\n      }\n      studios(isMain: true) {\n        edges {\n          node {\n            name\n          }\n        }\n      }\n      recommendations {\n        edges {\n          node {\n            id\n            mediaRecommendation {\n              ...mediafields\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GetAnimeByIdDocument,
     "\n  fragment mediafields on Media {\n    id\n    title {\n      english\n      romaji\n    }\n    coverImage {\n      large\n      medium\n    }\n    duration\n    status\n    episodes\n    format\n  }\n": types.MediafieldsFragmentDoc,
+    "\n  query mostPopular10 {\n    Page(page: 1, perPage: 10) {\n      media(type: ANIME, sort: POPULARITY_DESC) {\n        id\n        title {\n          romaji\n          english\n        }\n        format\n        episodes\n        coverImage {\n          medium\n        }\n      }\n    }\n  }\n": types.MostPopular10Document,
     "\n  \n  query SearchAnime($search: String, $type: MediaType!) {\n    Media(search: $search, type: $type) {\n      ...mediafields\n      relations {\n        nodes {\n          ...mediafields\n        }\n      }\n    }\n  }\n": types.SearchAnimeDocument,
 };
 
@@ -41,6 +42,10 @@ export function gql(source: "\n  \n  query getAnimeById($mediaId: Int) {\n    Me
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  fragment mediafields on Media {\n    id\n    title {\n      english\n      romaji\n    }\n    coverImage {\n      large\n      medium\n    }\n    duration\n    status\n    episodes\n    format\n  }\n"): (typeof documents)["\n  fragment mediafields on Media {\n    id\n    title {\n      english\n      romaji\n    }\n    coverImage {\n      large\n      medium\n    }\n    duration\n    status\n    episodes\n    format\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query mostPopular10 {\n    Page(page: 1, perPage: 10) {\n      media(type: ANIME, sort: POPULARITY_DESC) {\n        id\n        title {\n          romaji\n          english\n        }\n        format\n        episodes\n        coverImage {\n          medium\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query mostPopular10 {\n    Page(page: 1, perPage: 10) {\n      media(type: ANIME, sort: POPULARITY_DESC) {\n        id\n        title {\n          romaji\n          english\n        }\n        format\n        episodes\n        coverImage {\n          medium\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

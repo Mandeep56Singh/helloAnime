@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import AnimeInfoCard from "../components/AnimePage/AnimeInfoCard";
 import AnimeMetaData from "../components/AnimePage/AnimeMetaData";
 import AnimeCardGrid from "../components/layout/AnimeCardGrid";
+import MostPopularAnime10 from "../components/MostPopular/MostPopularAnime10";
 import {
   GetAnimeByIdQuery,
   GetAnimeByIdQueryVariables,
@@ -58,13 +59,15 @@ const AnimePage = () => {
             xs: "column",
             lg: "row",
           }}
+          spacing={4}
         >
-          <Stack direction={"column"} spacing={2}>
+          <Stack direction={"column"} spacing={2} flex={{ lg: 3 }}>
             <Typography variant="h3" color="text.secondary">
               Recommended for you
             </Typography>
             <AnimeCardGrid AnimeList={recommendedAnimeData}></AnimeCardGrid>
           </Stack>
+            <MostPopularAnime10 ></MostPopularAnime10>
         </Stack>
       </Box>
     );
