@@ -1,20 +1,65 @@
-import {graphql} from '../../graphql/types/gql'
-export const GetAnimePage = graphql(`
-  query GetAnimePage($Page: Int = 1, $PerPage: Int = 10) {
-    Page(page: $Page, perPage: $PerPage) {
-      media {
-        id
-        title {
-          english
+import { gql } from "@apollo/client";
+
+import { MediaFields } from "../fragments/mediafields";
+export const animePage = gql`
+  ${MediaFields}
+  query getAnimeById($mediaId: Int) {
+    Media(id: $mediaId) {
+      id
+      title {
+        english
+        romaji
+      }
+      description
+      coverImage {
+        color
+        extraLarge
+        large
+      }
+      type
+      episodes
+      genres
+      status
+      duration
+      updatedAt
+      trending
+      format
+      averageScore
+      startDate {
+        day
+        month
+        year
+      }
+      endDate {
+        day
+        month
+        year
+      }
+      relations {
+        edges {
+          relationType
+          node {
+            ...mediafields
+          }
         }
-        coverImage {
-          medium
+      }
+      studios(isMain: true) {
+        edges {
+          node {
+            name
+          }
         }
-        episodes
-        status
-        genres
-        format
+      }
+      recommendations {
+        edges {
+          node {
+            id
+            mediaRecommendation {
+              ...mediafields
+            }
+          }
+        }
       }
     }
   }
-`);
+`;

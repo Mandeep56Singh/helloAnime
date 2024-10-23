@@ -24,7 +24,7 @@ const ViewAllSearchResultPage = () => {
   const firstItem = {
     id: media.id,
     title: media.title,
-    coverImage: media.coverImage,
+    coverImage: media.coverImage?.large,
     format: media.format,
     status: media.status,
     episodes: media.episodes,

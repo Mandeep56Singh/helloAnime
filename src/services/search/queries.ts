@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { MediaFields } from "./mediafields";
+import { MediaFields } from "../fragments/mediafields";
 export const SearchAnime = gql`
   ${MediaFields}
   query SearchAnime($search: String, $type: MediaType!) {

@@ -1,9 +1,55 @@
-import React from 'react'
-
+import { useQuery } from "@apollo/client";
+import { Box, Stack } from "@mui/material";
+import { useParams } from "react-router-dom";
+import AnimeInfoCard from "../components/AnimePage/AnimeInfoCard";
+import AnimeMetaData from "../components/AnimePage/AnimeMetaData";
+import {
+  GetAnimeByIdQuery,
+  GetAnimeByIdQueryVariables,
+} from "../graphql/types/graphql";
+import { animePage } from "../services/animePage/queries";
 const AnimePage = () => {
-  return (
-    <div>AnimePage</div>
-  )
-}
+  const { id } = useParams<{ id: string }>();
+  const { loading, error, data } = useQuery<
+    GetAnimeByIdQuery,
+    GetAnimeByIdQueryVariables
+  >(animePage, {
+    variables: { mediaId: Number(id) },
+  });
 
-export default AnimePage
+  if (loading) {
+    return <div>Loading</div>;
+  } else if (data) {
+    const animeData = data.Media!;
+
+    return (
+      <Box
+        sx={{
+          padding: "14px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
+        }}
+      >
+        <Stack
+          direction={{
+            xs: "column",
+            lg: "row",
+          }}
+          sx={{
+            overflow: "hidden",
+            marginInline: -4,
+            marginTop: -5.8,
+          }}
+        >
+          <AnimeInfoCard data={animeData}></AnimeInfoCard>
+          <AnimeMetaData data={animeData}></AnimeMetaData>
+        </Stack>
+      </Box>
+    );
+  } else {
+    return <div> {error?.message}</div>;
+  }
+};
+
+export default AnimePage;
