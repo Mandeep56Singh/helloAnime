@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { theme } from "../../theme/theme";
 import SearchBar from "../search/Searchbar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [searchToggle, setSearchToggle] = useState<boolean>(false);
@@ -41,11 +41,13 @@ export const Navbar = () => {
           </IconButton>
           <Typography
             variant={"h4"}
-            component={"div"}
+            component={Link}
+            to="/"
             sx={{
               flexGrow: 1,
               display: "flex",
-             
+             textDecoration:"none",
+             color:"text.primary"
             }}
           >
             hello
