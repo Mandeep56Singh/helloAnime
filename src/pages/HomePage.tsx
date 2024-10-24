@@ -1,9 +1,6 @@
-import { useQuery } from "@apollo/client";
-import { GetAnimePage } from "../services/animePage/queries";
 
-import React from "react";
-import { Navbar } from "../components/navbar/Navbar";
 import { Box } from "@mui/material";
+import SpotLightSlder from "../components/SpotLight/SpotLightSlider";
 
 const HomePage = () => {
   // const { loading, error, data } = useQuery(GetAnimePage, {
@@ -14,7 +11,11 @@ const HomePage = () => {
   // if (loading) return <p>Loading...</p>;
   // const animeList = data?.Page?.media;
  return (
-  <Box>hello</Box>
+  <Box>
+
+    <SpotLightSlder></SpotLightSlder>
+  </Box>
+
  )
 };
 

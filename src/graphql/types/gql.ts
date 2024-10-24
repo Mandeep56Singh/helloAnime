@@ -18,6 +18,7 @@ const documents = {
     "\n  fragment mediafields on Media {\n    id\n    title {\n      english\n      romaji\n    }\n    coverImage {\n      large\n      medium\n    }\n    duration\n    status\n    episodes\n    format\n  }\n": types.MediafieldsFragmentDoc,
     "\n  query mostPopular10 {\n    Page(page: 1, perPage: 10) {\n      media(type: ANIME, sort: POPULARITY_DESC) {\n        id\n        title {\n          romaji\n          english\n        }\n        format\n        episodes\n        coverImage {\n          medium\n        }\n      }\n    }\n  }\n": types.MostPopular10Document,
     "\n  \n  query SearchAnime($search: String, $type: MediaType!) {\n    Media(search: $search, type: $type) {\n      ...mediafields\n      relations {\n        nodes {\n          ...mediafields\n        }\n      }\n    }\n  }\n": types.SearchAnimeDocument,
+    "\n  query spotlightAnime {\n    Page(page: 1, perPage: 10) {\n      media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {\n        id\n        title {\n          romaji\n          english\n        }\n       bannerImage\n      }\n    }\n  }\n": types.SpotlightAnimeDocument,
 };
 
 /**
@@ -50,6 +51,10 @@ export function gql(source: "\n  query mostPopular10 {\n    Page(page: 1, perPag
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  \n  query SearchAnime($search: String, $type: MediaType!) {\n    Media(search: $search, type: $type) {\n      ...mediafields\n      relations {\n        nodes {\n          ...mediafields\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  \n  query SearchAnime($search: String, $type: MediaType!) {\n    Media(search: $search, type: $type) {\n      ...mediafields\n      relations {\n        nodes {\n          ...mediafields\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query spotlightAnime {\n    Page(page: 1, perPage: 10) {\n      media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {\n        id\n        title {\n          romaji\n          english\n        }\n       bannerImage\n      }\n    }\n  }\n"): (typeof documents)["\n  query spotlightAnime {\n    Page(page: 1, perPage: 10) {\n      media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {\n        id\n        title {\n          romaji\n          english\n        }\n       bannerImage\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
