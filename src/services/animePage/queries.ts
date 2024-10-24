@@ -43,7 +43,7 @@ export const animePage = gql`
           }
         }
       }
-      studios(isMain: true) {
+      studios{
         edges {
           node {
             name

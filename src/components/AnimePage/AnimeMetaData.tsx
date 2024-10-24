@@ -10,7 +10,8 @@ type AnimeMetaDataProps = {
 const AnimeMetaData: React.FC<AnimeMetaDataProps> = ({ data }) => {
   const aired = getAiredDate(data.startDate, data.endDate);
   const timeDuration = getTimeDuration(data.duration);
-  const producer = data.studios?.edges?.[0]?.node?.name;
+  // const producer = data.studios?.edges?.[0]?.node?.name;
+  const studios = data.studios?.edges;
   return (
     <Box
       sx={{
@@ -105,21 +106,31 @@ const AnimeMetaData: React.FC<AnimeMetaDataProps> = ({ data }) => {
               zIndex: 1,
             }}
           >
-            <Typography variant="subtitle1" color="secondary.light">
-              Studios:{" "}
-            </Typography>
-            {producer ? (
-              <Typography
-                component={Link}
-                to={`/producer/:${producer}`}
-                variant="caption"
-                color="secondary.light"
-                sx={{
-                  textDecoration: "none",
-                }}
+            {studios?.length ? (
+              <Stack
+                direction={"row"}
+                spacing={0.6}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+              
               >
-                {producer}
-              </Typography>
+                <Typography variant="subtitle1" color="secondary.light">
+                  Studios:{" "}
+                </Typography>
+                {studios.map((studio,i) => (
+                  <Typography
+                    component={Link}
+                    to={`/producer/:${studio?.node?.name}`}
+                    variant="caption"
+                    color="secondary.light"
+                    sx={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    {studio?.node?.name} {i !== studios.length -1 && <i>,</i> }
+                  </Typography>
+                ))}
+              </Stack>
             ) : null}
           </Stack>
         </Stack>
