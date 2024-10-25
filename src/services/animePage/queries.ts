@@ -6,13 +6,15 @@ export const animePage = gql`
   query getAnimeById($mediaId: Int) {
     Media(id: $mediaId) {
       id
+      __typename
       title {
+        __typename
         english
         romaji
       }
       description
       coverImage {
-        color
+        __typename
         extraLarge
         large
       }
@@ -26,35 +28,47 @@ export const animePage = gql`
       format
       averageScore
       startDate {
+        __typename
         day
         month
         year
       }
       endDate {
+        __typename
         day
         month
         year
       }
       relations {
+        __typename
         edges {
+          __typename
           relationType
           node {
+            __typename
             ...mediafields
           }
         }
       }
-      studios{
+      studios {
+        __typename
         edges {
+          __typename
           node {
+            __typename
             name
           }
         }
       }
       recommendations {
+        __typename
         edges {
+          __typename
           node {
+            __typename
             id
             mediaRecommendation {
+              __typename
               ...mediafields
             }
           }

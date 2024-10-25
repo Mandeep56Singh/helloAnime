@@ -14,8 +14,10 @@ import { StyledChevronButton } from "../styled components/StyledChevronButton";
 import SpotLightAnime from "./SpotLightAnime";
 
 const SpotLightSlder = () => {
-  const { loading, error, data } =
-    useQuery<SpotlightAnimeQuery>(spotlightAnime);
+  const { loading, error, data } = useQuery<SpotlightAnimeQuery>(
+    spotlightAnime,
+    
+  );
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const swiperRef = useRef<any>(null);
 
@@ -45,7 +47,7 @@ const SpotLightSlder = () => {
       <Swiper
         ref={swiperRef}
         centeredSlides={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }} 
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         modules={[Autoplay, Pagination, Navigation]}
       >
@@ -63,7 +65,7 @@ const SpotLightSlder = () => {
       {/* Navigation Buttons */}
 
       <StyledChevronButton
-      onClick={handleNext}
+        onClick={handleNext}
         sx={{
           position: "absolute",
           bottom: "20%",
@@ -74,7 +76,7 @@ const SpotLightSlder = () => {
         <ChevronRightIcon fontSize="large" />
       </StyledChevronButton>
       <StyledChevronButton
-      onClick={handlePrev}
+        onClick={handlePrev}
         sx={{
           position: "absolute",
           bottom: 0,

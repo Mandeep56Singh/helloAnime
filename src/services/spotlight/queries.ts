@@ -5,11 +5,13 @@ export const spotlightAnime = gql`
     Page(page: 1, perPage: 10) {
       media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
         id
+        __typename
         title {
+          __typename
           romaji
           english
         }
-       bannerImage
+        bannerImage
       }
     }
   }
