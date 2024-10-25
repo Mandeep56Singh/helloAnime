@@ -48,7 +48,6 @@ const AnimePage = () => {
           sx={{
             overflow: "hidden",
             marginInline: -4,
-            marginTop: -5.8,
           }}
         >
           <AnimeInfoCard data={animeData}></AnimeInfoCard>

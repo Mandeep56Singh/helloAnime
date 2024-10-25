@@ -42,7 +42,7 @@ const SpotLightSlder = () => {
   const spotlightAnimeData = data?.Page?.media;
 
   return (
-    <Box position={"relative"} sx={{ marginInline: -2, marginTop: -4 }}>
+    <Box position={"relative"} sx={{ marginInline: -2 }}>
       {/* Swiper Component */}
       <Swiper
         ref={swiperRef}
