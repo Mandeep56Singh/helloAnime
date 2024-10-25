@@ -1,17 +1,18 @@
-import React, { useRef, useState } from "react";
-import { Navigation, Pagination } from "swiper/modules";
+import { useRef } from "react";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useQuery } from "@apollo/client";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { TrendingAnimeQuery } from "../../graphql/types/graphql";
 import { TrendingAnime } from "../../services/Trending/queries";
+import { StyledChevronButton } from "../styled components/StyledChevronButton";
 const TrendingAnimeSlider = () => {
   const { loading, error, data } = useQuery<TrendingAnimeQuery>(TrendingAnime);
   const swiperRef = useRef<any>(null);
@@ -52,11 +53,9 @@ const TrendingAnimeSlider = () => {
               slidesPerView: 6,
             },
           }}
-          centeredSlides={true}
           modules={[Navigation]}
           style={{
             width: "calc(100% - 70px)",
-            // backgroundColor:"red"
           }}
         >
           {trendingAnimeList?.map((anime, i) => (
@@ -70,7 +69,6 @@ const TrendingAnimeSlider = () => {
                   height: "auto",
                   display: "inline-block",
                   overflow: "hidden",
-                 
                 }}
               >
                 <Stack
@@ -85,7 +83,6 @@ const TrendingAnimeSlider = () => {
                     overflow: "hidden",
                     width: "40px",
                     textAlign: "center",
-                    
                   }}
                 >
                   <Typography
@@ -122,7 +119,6 @@ const TrendingAnimeSlider = () => {
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       left: "-55px",
-                      
                     }}
                   >
                     {anime?.title?.english || anime?.title?.romaji}
@@ -149,7 +145,6 @@ const TrendingAnimeSlider = () => {
                     component="img"
                     src={anime?.coverImage?.large || ""}
                     sx={{
-                      // position: "absolute",
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
@@ -162,44 +157,18 @@ const TrendingAnimeSlider = () => {
           ))}
         </Swiper>
         <Stack direction={"column"} spacing={1}>
-          <Button
+          <StyledChevronButton
+            sx={{ flex: 1, paddingInline: "0.25rem" }}
             onClick={handleNext}
-            sx={{
-              //   position: "absolute",
-              //   top: "30%",
-              //   right: "20px",
-              //   transform: "translateY(-50%)",
-              //   zIndex: 10,
-              flex: 1,
-              backgroundColor: "rgba(255,255,255,.1)",
-              color: "text.primary",
-              padding: "0.5rem 0.25rem",
-              minWidth: "auto",
-              "&:hover": {
-                backgroundColor: "action.hover",
-                color: "text.dark.primary",
-              },
-            }}
           >
             <ChevronRightIcon fontSize="large" />
-          </Button>
-          <Button
-            size="large"
+          </StyledChevronButton>
+          <StyledChevronButton
+            sx={{ flex: 1, paddingInline: "0.25rem" }}
             onClick={handlePrev}
-            sx={{
-              flex: 1,
-              backgroundColor: "rgba(255,255,255,.1)",
-              color: "text.primary",
-              padding: "1rem 0.25rem",
-              minWidth: "auto",
-              "&:hover": {
-                backgroundColor: "action.hover",
-                color: "text.dark.primary",
-              },
-            }}
           >
             <ChevronLeftIcon fontSize="large" />
-          </Button>
+          </StyledChevronButton>
         </Stack>
       </Stack>
     </Stack>

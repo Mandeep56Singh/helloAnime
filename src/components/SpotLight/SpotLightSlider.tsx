@@ -2,17 +2,16 @@ import { useQuery } from "@apollo/client";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 import { useRef } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SpotlightAnimeQuery } from "../../graphql/types/graphql";
 import { spotlightAnime } from "../../services/spotlight/queries";
+import { StyledChevronButton } from "../styled components/StyledChevronButton";
 import SpotLightAnime from "./SpotLightAnime";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 const SpotLightSlder = () => {
   const { loading, error, data } =
@@ -46,7 +45,7 @@ const SpotLightSlder = () => {
       <Swiper
         ref={swiperRef}
         centeredSlides={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }} // Fixed autoplay behavior
+        autoplay={{ delay: 3000, disableOnInteraction: false }} 
         pagination={{ clickable: true }}
         modules={[Autoplay, Pagination, Navigation]}
       >
@@ -62,45 +61,29 @@ const SpotLightSlder = () => {
       </Swiper>
 
       {/* Navigation Buttons */}
-      <Button
-        onClick={handlePrev}
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "20px",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          color: "white",
-          padding: "0.5rem",
-          minWidth: "auto",
-          "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-          },
-        }}
-      >
-        <ChevronLeftIcon fontSize="large" />
-      </Button>
 
-      <Button
-        onClick={handleNext}
+      <StyledChevronButton
+      onClick={handleNext}
         sx={{
           position: "absolute",
-          top: "50%",
+          bottom: "20%",
           right: "20px",
           transform: "translateY(-50%)",
-          zIndex: 10,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          color: "white",
-          padding: "0.5rem",
-          minWidth: "auto",
-          "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-          },
         }}
       >
         <ChevronRightIcon fontSize="large" />
-      </Button>
+      </StyledChevronButton>
+      <StyledChevronButton
+      onClick={handlePrev}
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          right: "20px",
+          transform: "translateY(-50%)",
+        }}
+      >
+        <ChevronLeftIcon fontSize="large" />
+      </StyledChevronButton>
     </Box>
   );
 };
