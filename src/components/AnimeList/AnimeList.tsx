@@ -13,9 +13,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Media } from "../../graphql/types/graphql";
 import StyledEpisodeLabel from "../styled components/StyledEpisodeLabel";
-
+import { AnimeListItemFragment } from "../../graphql/types/graphql";
 type Props = {
-  data: Media[];
+  data: AnimeListItemFragment[];
 };
 
 const AnimeList: React.FC<Props> = ({ data }) => {
