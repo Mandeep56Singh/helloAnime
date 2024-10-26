@@ -4,6 +4,7 @@ import NewAnime12 from "../components/NewAnime/NewAnime12";
 import SpotLightSlder from "../components/SpotLight/SpotLightSlider";
 import AnimeTop5 from "../components/Top5/AnimeTop5";
 import TrendingAnimeSlider from "../components/Trending/TrendingAnimeSlider";
+import UpcomingAnime12 from "../components/Upcoming/UpcomingAnime12";
 
 const HomePage = () => {
   return (
@@ -30,6 +31,11 @@ const HomePage = () => {
               New Episodes
             </Typography>
             <NewAnime12></NewAnime12>
+            <Typography variant="h3" color="text.secondary">
+              Top Upcoming
+            </Typography>
+            <UpcomingAnime12></UpcomingAnime12>
+
           </Stack>
           <Stack direction={"column"} spacing={2} flex={{ lg: 1 }}>
             <Typography variant="h3" color="text.secondary">

@@ -4,7 +4,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { green } from "@mui/material/colors";
 import { Box, Stack } from "@mui/system";
@@ -16,9 +15,9 @@ type AnimeCardProps = {
   data: MediafieldsFragment;
 };
 const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
- const timeDuration = getTimeDuration(data.duration);
- console.log("time",data);
- console.log("time function",timeDuration);
+  const timeDuration = getTimeDuration(data.duration);
+  console.log("time", data);
+  console.log("time function", timeDuration);
   return (
     <Card
       elevation={0}
@@ -107,10 +106,10 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
             }}
           >
             <Typography variant="caption" color="text.disabled">
-              {data.format}
+              {data.format || "format(?)"}
             </Typography>
             <Typography variant="caption" color="text.disabled">
-              {data.status}
+              {data.status || "status(?)"}
             </Typography>
             {data.format?.toLowerCase() != "anime" ||
             data.format?.toLowerCase() != "manga" ? (
