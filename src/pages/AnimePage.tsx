@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import AnimeInfoCard from "../components/AnimePage/AnimeInfoCard";
 import AnimeMetaData from "../components/AnimePage/AnimeMetaData";
 import AnimeCardGrid from "../components/layout/AnimeCardGrid";
-import MostPopularAnime10 from "../components/MostPopular/MostPopularAnime10";
+import MostPopularAnimeSideList from "../components/MostPopular/MostPopularAnimeSideList";
 import {
   GetAnimeByIdQuery,
   GetAnimeByIdQueryVariables,
@@ -66,7 +66,7 @@ const AnimePage = () => {
             </Typography>
             <AnimeCardGrid AnimeList={recommendedAnimeData}></AnimeCardGrid>
           </Stack>
-            <MostPopularAnime10 ></MostPopularAnime10>
+          <MostPopularAnimeSideList></MostPopularAnimeSideList>
         </Stack>
       </Box>
     );

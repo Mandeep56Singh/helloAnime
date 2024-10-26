@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const mostPopular10 = gql`
-  query mostPopular10 {
-    Page(page: 1, perPage: 10) {
+export const mostPopular = gql`
+  query mostPopular($page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
       media(type: ANIME, sort: POPULARITY_DESC) {
         id
         __typename
@@ -21,4 +21,3 @@ export const mostPopular10 = gql`
     }
   }
 `;
-
