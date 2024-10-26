@@ -11,18 +11,14 @@ import { Box, Stack } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { MediafieldsFragment } from "../../graphql/types/graphql";
+import { getTimeDuration } from "../../utils/utils";
 type AnimeCardProps = {
   data: MediafieldsFragment;
 };
 const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
-  const minutes = data.duration || 0;
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-
-  const timeDuration =
-    hours === 0
-      ? `${remainingMinutes}min`
-      : `${hours}hr ${remainingMinutes}min`;
+ const timeDuration = getTimeDuration(data.duration);
+ console.log("time",data);
+ console.log("time function",timeDuration);
   return (
     <Card
       elevation={0}

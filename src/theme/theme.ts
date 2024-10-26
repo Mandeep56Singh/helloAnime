@@ -18,6 +18,7 @@ export const theme = responsiveFontSizes(
       background: {
         default: "#2D2B44",
         paper: "#999999",
+        transparent:"rgba(255,255,255,.1)",
       },
       spacing: {
         textPadding: "4px 8px",
@@ -33,6 +34,23 @@ export const theme = responsiveFontSizes(
 
       action: {
         hover: "#FFBADE",
+       
+      },
+
+      genreColors: {
+        lightGreen: "#A8E6CF",
+        pink: "#FF8B94",
+        orange: "#FFA726",
+        lightPurple: "#D1C4E9",
+        lightBlue: "#81D4FA",
+        purple: "#B39DDB",
+        green: "#4CAF50",
+        teal: "#4DD0E1",
+        purplePink: "#F48FB1",
+        red: "#E57373",
+        yellowGreen: "#DCE775",
+        orangeRed: "#FF7043",
+        pinkishRed: "#FF5252",
       },
     },
 

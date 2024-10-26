@@ -15,8 +15,9 @@ const AnimeCardGrid: React.FC<AnimeCardGridProps> = ({ AnimeList }) => {
             sm: 4,
             md: 3,
           }}
+          key={Anime.id + index}
         >
-          <AnimeCard data={Anime} key={Anime.id + index}></AnimeCard>
+          <AnimeCard data={Anime}></AnimeCard>
         </Grid2>
       ))}
     </Grid2>
