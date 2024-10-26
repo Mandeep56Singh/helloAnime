@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { MediaFields } from "../fragments/mediafields";
+import { animeListItem } from "../fragments/animeListItem";
 export const newAnime12 = gql`
-  ${MediaFields}
-  query NewAnime12 {
-    Page(page: 1, perPage: 12) {
+  ${animeListItem}
+  query NewAnime12($page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
       __typename
       media(
         type: ANIME
@@ -12,7 +12,8 @@ export const newAnime12 = gql`
         isAdult: false
       ) {
         __typename
-        ...mediafields
+        ...animeListItem
+        duration
       }
     }
   }
