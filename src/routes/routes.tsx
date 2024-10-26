@@ -12,7 +12,7 @@ import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 
 const routes = createBrowserRouter([
   {
-    path: "", // This makes the homepage accessible at localhost:3000
+    path: "/",
     element: <Layout></Layout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
@@ -41,7 +41,7 @@ const routes = createBrowserRouter([
         element: <TVSeriesPage></TVSeriesPage>,
       },
       {
-        path: "/search-result/:searchQuery",
+        path: "search/:searchQuery",
         element: <ViewAllSearchResultPage></ViewAllSearchResultPage>,
       },
       {

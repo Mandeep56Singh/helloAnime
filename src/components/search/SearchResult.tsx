@@ -111,7 +111,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
         >
           <Box
             component={Link}
-            to={`search-result/${searchQuery}`}
+            to={`search/${searchQuery}`}
             sx={{
               textDecoration: "none",
               display: "flex",

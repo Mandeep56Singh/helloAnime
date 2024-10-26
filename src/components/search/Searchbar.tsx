@@ -68,7 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     const value = searchQuery.trim();
     console.log(value);
     if(value && (value.length > 2)) {
-      navigate(`search-result/${value}`);
+      navigate(`search/${value}`);
     }
   };
 
