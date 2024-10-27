@@ -9,6 +9,7 @@ import MoviesPage from "../pages/MoviesPage";
 import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
+import MostPopular from "../pages/MostPopular";
 
 const routes = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const routes = createBrowserRouter([
         path: "anime/:id",
         element: <AnimePage></AnimePage>,
       },
+      {
+        path:"most-popular",
+        element:<MostPopular></MostPopular>
+      }
     ],
   },
 ]);

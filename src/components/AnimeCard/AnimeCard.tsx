@@ -16,8 +16,7 @@ type AnimeCardProps = {
 };
 const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
   const timeDuration = getTimeDuration(data.duration);
-  console.log("time", data);
-  console.log("time function", timeDuration);
+
   return (
     <Card
       elevation={0}
