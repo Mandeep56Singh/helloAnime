@@ -9,25 +9,27 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { theme } from "../../theme/theme";
 import SearchBar from "../search/Searchbar";
-import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [searchToggle, setSearchToggle] = useState<boolean>(false);
-  const location  = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     setSearchToggle(false);
-  },[location])
+  }, [location]);
   return (
-    <Box sx={{
-      position:'absolute',
-      width:"100%",
-      top:0,
-      left:0,
-      zIndex:99
-    }}>
+    <Box
+      sx={{
+        position: "absolute",
+        width: "100%",
+        top: 0,
+        left: 0,
+        zIndex: 99,
+      }}
+    >
       <AppBar
         position={"sticky"}
         aria-label="navbar"
@@ -50,10 +52,10 @@ export const Navbar = () => {
             component={Link}
             to="/"
             sx={{
-              flexGrow: 1,
               display: "flex",
-             textDecoration:"none",
-             color:"text.primary"
+              textDecoration: "none",
+              color: "text.primary",
+              marginRight: "auto",
             }}
           >
             hello
@@ -64,7 +66,7 @@ export const Navbar = () => {
             <SearchIcon
               sx={{
                 color: searchToggle ? "secondary.main" : "#FFF",
-                mr:"5px"
+                mr: "5px",
               }}
             ></SearchIcon>
           </IconButton>
