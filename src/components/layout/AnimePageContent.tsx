@@ -12,6 +12,7 @@ type props = {
   pageInfo: PageInfo | null;
   baseRoute: string;
   setCurrentPage: (page: number) => void;
+  stableLastPage: number; // Use stable last page from parent
 };
 
 const AnimePageContent: React.FC<props> = ({
@@ -20,10 +21,14 @@ const AnimePageContent: React.FC<props> = ({
   pageInfo,
   baseRoute,
   setCurrentPage,
+  stableLastPage,
 }) => {
+  const currentPage = pageInfo?.currentPage as number;
+
   const handleChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
+
   return (
     <Stack direction={"column"} spacing={4}>
       <Typography variant="h3" color="text.secondary">
@@ -44,8 +49,8 @@ const AnimePageContent: React.FC<props> = ({
         >
           <AnimeCardGrid AnimeList={animeList || []} />
           <StyledPagination
-            count={pageInfo?.lastPage || 10}
-            page={pageInfo?.currentPage || 1}
+            count={stableLastPage || 10}
+            page={currentPage || 1}
             size="large"
             showFirstButton
             showLastButton
