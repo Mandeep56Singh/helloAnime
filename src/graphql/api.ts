@@ -17,13 +17,7 @@ const client = new ApolloClient({
         fields: {
           Page: {
             keyArgs: false,
-
-            merge(existing, incoming) {
-              if (Array.isArray(existing)) {
-                existing = [];
-                return [...existing, ...incoming];
-              }
-              existing = {};
+            merge(existing = {}, incoming) {
               return { ...existing, ...incoming };
             },
           },
