@@ -11,7 +11,7 @@ export const mostPopular = gql`
       pageInfo {
         ...pageInfo
       }
-      media(type: ANIME, sort: POPULARITY_DESC) {
+      media(type: ANIME, sort: POPULARITY_DESC, isAdult:false) {
         ...mediafields
       }
     }
