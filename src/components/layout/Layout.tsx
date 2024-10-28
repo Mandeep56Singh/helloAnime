@@ -7,8 +7,8 @@ const Layout = () => {
     <Box>
       <Navbar></Navbar>
       <Box sx={{
-        py:4,
-        px:2
+        py:8,
+        px:2,
       }}>
         <Outlet></Outlet>
       </Box>

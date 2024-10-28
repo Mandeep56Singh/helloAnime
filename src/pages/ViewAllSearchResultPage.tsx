@@ -36,7 +36,7 @@ const ViewAllSearchResultPage = () => {
     ...(remainingMediaItem || []),
   ];
   return (
-    <Stack spacing={1} mx={{marginTop:60}}>
+    <Stack spacing={1}>
       <Typography color="text.secondary" variant="h5">
         Search Results for:<i> {searchQuery}</i>
       </Typography>
