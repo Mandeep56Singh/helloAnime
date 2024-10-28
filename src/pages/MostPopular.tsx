@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { useCallback } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import AnimePageContent from "../components/layout/AnimePageContent";
 import {
@@ -12,37 +13,47 @@ import { mostPopular } from "../services/mostpopular/queries";
 
 const MostPopular = () => {
   const PER_PAGE_LIMIT = 40;
-  const { loading, error, data, fetchMore } = useQuery<
+  const { page } = useParams();
+
+  const [currentPage, setCurrentPage] = useState<number>(
+    page ? Number(page) : 1
+  );
+
+  console.log(currentPage, "currentpage");
+
+  const { loading, error, data, refetch } = useQuery<
     MostPopularQuery,
     MostPopularQueryVariables
   >(mostPopular, {
     variables: {
-      page: 1,
+      page: currentPage,
       perPage: PER_PAGE_LIMIT,
     },
     notifyOnNetworkStatusChange: true,
   });
 
-  const handlePageChange = useCallback(
-    (page: number) => {
-      fetchMore({
-        variables: { page },
-      });
-    },
-    [fetchMore]
-  );
+  useEffect(() => {
+    refetch({
+      page: currentPage,
+      perPage: PER_PAGE_LIMIT,
+    });
+  }, [currentPage, refetch]);
 
-  if (loading) return <div>loading...</div>;
-  else if (error) return <div>{error.message}</div>;
+  
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   const list = data?.Page?.media as MediafieldsFragment[];
   const pageInfo = data?.Page?.pageInfo as PageInfo;
+
   return (
     <AnimePageContent
       title="Most Popular"
       pageInfo={pageInfo}
       animeList={list || []}
-      onPageChange={handlePageChange}
-    ></AnimePageContent>
+      baseRoute="/most-popular"
+      setCurrentPage={setCurrentPage}
+    />
   );
 };
 

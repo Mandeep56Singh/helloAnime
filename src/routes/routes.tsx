@@ -50,7 +50,7 @@ const routes = createBrowserRouter([
         element: <AnimePage></AnimePage>,
       },
       {
-        path:"most-popular",
+        path:"most-popular/:page?",
         element:<MostPopular></MostPopular>
       }
     ],

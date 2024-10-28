@@ -1,5 +1,6 @@
-import { Stack, Typography } from "@mui/material";
+import { PaginationItem, Stack, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import { MediafieldsFragment, PageInfo } from "../../graphql/types/graphql";
 import Genre from "../Genre/Genre";
 import { StyledPagination } from "../styled components/StyledPagination";
@@ -9,18 +10,20 @@ type props = {
   title: string;
   animeList: MediafieldsFragment[];
   pageInfo: PageInfo | null;
-  onPageChange: (page: number) => void;
+  baseRoute: string;
+  setCurrentPage: (page: number) => void;
 };
+
 const AnimePageContent: React.FC<props> = ({
   title,
   animeList,
-  onPageChange,
   pageInfo,
+  baseRoute,
+  setCurrentPage,
 }) => {
-  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
-    onPageChange(value);
+  const handleChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
   };
-  console.log("Page", pageInfo, "page number", pageInfo?.currentPage);
   return (
     <Stack direction={"column"} spacing={4}>
       <Typography variant="h3" color="text.secondary">
@@ -39,18 +42,25 @@ const AnimePageContent: React.FC<props> = ({
           flex={{ lg: 3 }}
           alignItems={"center"}
         >
-          <AnimeCardGrid AnimeList={animeList || []}></AnimeCardGrid>
+          <AnimeCardGrid AnimeList={animeList || []} />
           <StyledPagination
             count={pageInfo?.lastPage || 10}
             page={pageInfo?.currentPage || 1}
-            onChange={handleChange}
             size="large"
             showFirstButton
             showLastButton
-          ></StyledPagination>
+            onChange={handleChange}
+            renderItem={(item) => (
+              <PaginationItem
+                component={Link}
+                to={`${baseRoute}/${item.page}`}
+                {...item}
+              />
+            )}
+          />
         </Stack>
         <Stack direction={"column"} spacing={2} flex={{ lg: 1 }}>
-          <Genre></Genre>
+          <Genre />
         </Stack>
       </Stack>
     </Stack>
