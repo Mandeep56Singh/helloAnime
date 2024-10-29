@@ -11,6 +11,7 @@ import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 import MostPopular from "../pages/MostPopular";
 import TopAiring from "../pages/TopAiring";
+import LatestCompleted from "../pages/LatestCompleted";
 
 const routes = createBrowserRouter([
   {
@@ -57,7 +58,11 @@ const routes = createBrowserRouter([
       {
         path:"top-airing/:page?",
         element:<TopAiring></TopAiring>
-      }
+      },
+      {
+        path:"latest-completed/:page?",
+        element:<LatestCompleted></LatestCompleted>
+      },
     ],
   },
 ]);

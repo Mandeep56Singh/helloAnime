@@ -21,6 +21,7 @@ const documents = {
     "\n  fragment mediafields on Media {\n    id\n    __typename\n    title {\n      __typename\n      english\n      romaji\n    }\n    coverImage {\n      __typename\n      large\n      medium\n    }\n    duration\n    status\n    episodes\n    format\n  }\n": types.MediafieldsFragmentDoc,
     "\n  fragment pageInfo on PageInfo {\n    __typename\n    currentPage\n    lastPage\n    hasNextPage\n  }\n": types.PageInfoFragmentDoc,
     "\n  query genreCollection {\n    GenreCollection\n  }\n": types.GenreCollectionDocument,
+    "\n  \n  \n  query latestCompleted($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      __typename\n      pageInfo {\n        ...pageInfo\n      }\n      media(\n        sort: END_DATE_DESC\n        type: ANIME\n        status: FINISHED\n        isAdult: false\n      ) {\n        ...mediafields\n      }\n    }\n  }\n": types.LatestCompletedDocument,
     "\n  \n  \n  query mostPopular($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      __typename\n      pageInfo {\n        ...pageInfo\n      }\n      media(type: ANIME, sort: POPULARITY_DESC, isAdult:false) {\n        ...mediafields\n      }\n    }\n  }\n": types.MostPopularDocument,
     "\n  \n  query NewAnime12($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      __typename\n      media(\n        type: ANIME\n        status: RELEASING\n        sort: START_DATE_DESC\n        isAdult: false\n      ) {\n        __typename\n        ...animeListItem\n        duration\n      }\n    }\n  }\n": types.NewAnime12Document,
     "\n  \n  query SearchAnime($search: String, $type: MediaType!) {\n    Media(search: $search, type: $type) {\n      ...mediafields\n      relations {\n        nodes {\n          ...mediafields\n        }\n      }\n    }\n  }\n": types.SearchAnimeDocument,
@@ -71,6 +72,10 @@ export function gql(source: "\n  fragment pageInfo on PageInfo {\n    __typename
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query genreCollection {\n    GenreCollection\n  }\n"): (typeof documents)["\n  query genreCollection {\n    GenreCollection\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  \n  \n  query latestCompleted($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      __typename\n      pageInfo {\n        ...pageInfo\n      }\n      media(\n        sort: END_DATE_DESC\n        type: ANIME\n        status: FINISHED\n        isAdult: false\n      ) {\n        ...mediafields\n      }\n    }\n  }\n"): (typeof documents)["\n  \n  \n  query latestCompleted($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      __typename\n      pageInfo {\n        ...pageInfo\n      }\n      media(\n        sort: END_DATE_DESC\n        type: ANIME\n        status: FINISHED\n        isAdult: false\n      ) {\n        ...mediafields\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
