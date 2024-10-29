@@ -112,22 +112,21 @@ const AnimeMetaData: React.FC<AnimeMetaDataProps> = ({ data }) => {
                 spacing={0.6}
                 alignItems={"center"}
                 flexWrap={"wrap"}
-              
               >
                 <Typography variant="subtitle1" color="secondary.light">
                   Studios:{" "}
                 </Typography>
-                {studios.map((studio,i) => (
+                {studios.map((studio, i) => (
                   <Typography
                     component={Link}
-                    to={`/producer/:${studio?.node?.name}`}
+                    to={`/producer/${studio?.node?.name}`}
                     variant="caption"
                     color="secondary.light"
                     sx={{
                       textDecoration: "none",
                     }}
                   >
-                    {studio?.node?.name} {i !== studios.length -1 && <i>,</i> }
+                    {studio?.node?.name} {i !== studios.length - 1 && <i>,</i>}
                   </Typography>
                 ))}
               </Stack>

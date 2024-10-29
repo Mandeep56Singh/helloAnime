@@ -13,6 +13,7 @@ import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
+import StudioPage from "../pages/StudioPage";
 
 const routes = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const routes = createBrowserRouter([
       {
         path: "most-favourites/:page?",
         element: <MostFavourites></MostFavourites>,
+      },
+      {
+        path: "producer/:studio/:page?",
+        element: <StudioPage></StudioPage>,
       },
     ],
   },
