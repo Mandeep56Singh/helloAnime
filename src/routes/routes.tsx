@@ -10,6 +10,7 @@ import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 import MostPopular from "../pages/MostPopular";
+import TopAiring from "../pages/TopAiring";
 
 const routes = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const routes = createBrowserRouter([
       {
         path:"most-popular/:page?",
         element:<MostPopular></MostPopular>
+      },
+      {
+        path:"top-airing/:page?",
+        element:<TopAiring></TopAiring>
       }
     ],
   },

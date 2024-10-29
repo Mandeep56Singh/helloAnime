@@ -2,10 +2,10 @@ import { gql } from "@apollo/client";
 import { MediaFields } from "../fragments/mediafields";
 import { pageInfo } from "../fragments/pageInfo";
 
-export const mostPopular = gql`
+export const topAiring = gql`
   ${MediaFields}
   ${pageInfo}
-  query mostPopular($page: Int, $perPage: Int) {
+  query topAiring($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
       __typename
       pageInfo {
