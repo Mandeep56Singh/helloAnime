@@ -1,6 +1,6 @@
 import { PaginationItem, Stack, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { MediafieldsFragment, PageInfo } from "../../graphql/types/graphql";
 import Genre from "../Genre/Genre";
 import { StyledPagination } from "../styled components/StyledPagination";
@@ -12,7 +12,6 @@ type props = {
   pageInfo: PageInfo | null;
   baseRoute: string;
   setCurrentPage: (page: number) => void;
-  stableLastPage: number; // Use stable last page from parent
 };
 
 const AnimePageContent: React.FC<props> = ({
@@ -21,13 +20,14 @@ const AnimePageContent: React.FC<props> = ({
   pageInfo,
   baseRoute,
   setCurrentPage,
-  stableLastPage,
 }) => {
   const currentPage = pageInfo?.currentPage as number;
+  const location = useLocation();
+  const { page } = useParams();
 
-  const handleChange = (_: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page);
-  };
+  useEffect(() => {
+    setCurrentPage(Number(page));
+  }, [location, page, setCurrentPage]);
 
   return (
     <Stack direction={"column"} spacing={4}>
@@ -49,12 +49,10 @@ const AnimePageContent: React.FC<props> = ({
         >
           <AnimeCardGrid AnimeList={animeList || []} />
           <StyledPagination
-            count={stableLastPage || 10}
+            count={pageInfo?.hasNextPage ? currentPage + 1 : currentPage}
             page={currentPage || 1}
             size="large"
             showFirstButton
-            showLastButton
-            onChange={handleChange}
             renderItem={(item) => (
               <PaginationItem
                 component={Link}
