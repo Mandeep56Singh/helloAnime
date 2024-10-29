@@ -37,7 +37,7 @@ const routes = createBrowserRouter([
         element: <MoviesPage></MoviesPage>,
       },
       {
-        path: "genre",
+        path: "genre/:type/:page?",
         element: <GenrePage></GenrePage>,
       },
       {

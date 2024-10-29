@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Box, Grid2, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { GenreCollectionQuery } from "../../graphql/types/graphql";
-import { genreCollection } from "../../services/genre/queries";
+import { genreCollection } from "../../services/genreCollection/queries";
 import { Link } from "react-router-dom";
 
 
