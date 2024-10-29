@@ -18,7 +18,7 @@ const AnimeTop5 = () => {
   const TopAnime5List = [TopAiring, TopFavorites, LatestCompleted, MostPopular];
   const ListItemNames = [
     "Top Airing",
-    "Most Favorites",
+    "Most Favourites",
     "Latest Completed",
     "Most Popular",
   ];

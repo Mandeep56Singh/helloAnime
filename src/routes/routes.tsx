@@ -5,13 +5,14 @@ import DubbedAnimePage from "../pages/DubbedAnimePage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
+import LatestCompleted from "../pages/LatestCompleted";
+import MostFavourites from "../pages/MostFavourites";
+import MostPopular from "../pages/MostPopular";
 import MoviesPage from "../pages/MoviesPage";
 import SubbedAnimePage from "../pages/SubbedAnimePage";
+import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
-import MostPopular from "../pages/MostPopular";
-import TopAiring from "../pages/TopAiring";
-import LatestCompleted from "../pages/LatestCompleted";
 
 const routes = createBrowserRouter([
   {
@@ -52,16 +53,20 @@ const routes = createBrowserRouter([
         element: <AnimePage></AnimePage>,
       },
       {
-        path:"most-popular/:page?",
-        element:<MostPopular></MostPopular>
+        path: "most-popular/:page?",
+        element: <MostPopular></MostPopular>,
       },
       {
-        path:"top-airing/:page?",
-        element:<TopAiring></TopAiring>
+        path: "top-airing/:page?",
+        element: <TopAiring></TopAiring>,
       },
       {
-        path:"latest-completed/:page?",
-        element:<LatestCompleted></LatestCompleted>
+        path: "latest-completed/:page?",
+        element: <LatestCompleted></LatestCompleted>,
+      },
+      {
+        path: "most-favourites/:page?",
+        element: <MostFavourites></MostFavourites>,
       },
     ],
   },
