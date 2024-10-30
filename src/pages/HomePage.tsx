@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Genre from "../components/Genre/Genre";
-import NewAnime12 from "../components/NewAnime/NewAnime12";
+import PopularThisSeason from "../components/PopularOnSeason/PopularThisSeason";
 import SpotLightSlder from "../components/SpotLight/SpotLightSlider";
 import AnimeTop5 from "../components/Top5/AnimeTop5";
 import TrendingAnimeSlider from "../components/Trending/TrendingAnimeSlider";
@@ -28,10 +28,30 @@ const HomePage = () => {
           spacing={4}
         >
           <Stack direction={"column"} spacing={2} flex={{ lg: 3 }}>
-            <Typography variant="h3" color="text.secondary">
-              New Episodes
-            </Typography>
-            <NewAnime12></NewAnime12>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Typography variant="h3" color="text.secondary">
+                Popular This season
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  textDecoration: "none",
+                  color: "text.disabled",
+                  ":hover": {
+                    color: "text.primary",
+                  },
+                }}
+                component={Link}
+                to={"/popular-this-season"}
+              >
+                View all
+              </Typography>
+            </Stack>
+              <PopularThisSeason></PopularThisSeason>
             <Stack
               direction={"row"}
               alignItems={"center"}

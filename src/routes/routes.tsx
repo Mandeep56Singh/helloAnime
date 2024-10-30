@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
+import AnimeFormatPage from "../pages/AnimeFormatPage";
 import AnimePage from "../pages/AnimePage";
 import DubbedAnimePage from "../pages/DubbedAnimePage";
 import ErrorPage from "../pages/ErrorPage";
@@ -9,13 +10,13 @@ import LatestCompleted from "../pages/LatestCompleted";
 import MostFavourites from "../pages/MostFavourites";
 import MostPopular from "../pages/MostPopular";
 import MoviesPage from "../pages/MoviesPage";
+import PopularThisSeasonPage from "../pages/PopularThisSeasonPage";
 import StudioPage from "../pages/StudioPage";
 import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
-import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
-import AnimeFormatPage from "../pages/AnimeFormatPage";
 import UpcomingAnimePage from "../pages/UpcomingAnimePage";
+import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 
 const routes = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const routes = createBrowserRouter([
       {
         path: "upcoming/:page?",
         element: <UpcomingAnimePage></UpcomingAnimePage>,
+      },
+      {
+        path: "popular-this-season/:page?",
+        element: <PopularThisSeasonPage></PopularThisSeasonPage>,
       },
     ],
   },
