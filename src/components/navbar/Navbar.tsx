@@ -1,25 +1,53 @@
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import {
+  alpha,
   AppBar,
+  Backdrop,
   Box,
   Button,
+  Divider,
+  Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { theme } from "../../theme/theme";
+import { generateLinkPath } from "../../utils/utils";
 import SearchBar from "../search/Searchbar";
+import { StyledDrawerHeader } from "../styled components/StyledDrawerHeader";
 
 export const Navbar = () => {
   const [searchToggle, setSearchToggle] = useState<boolean>(false);
+  const [menuToggle, setMenuToggle] = useState<boolean>(false);
+
   const location = useLocation();
+
+  const titles = [
+    "Home",
+    "Most Popular",
+    "Movies",
+    "TV Series",
+    "OVA",
+    "ONA",
+    "Special",
+  ];
 
   useEffect(() => {
     setSearchToggle(false);
   }, [location]);
+
+  const handleMenuToggle = () => {
+    setMenuToggle(!menuToggle);
+  };
   return (
     <Box
       sx={{
@@ -44,6 +72,7 @@ export const Navbar = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 0 }}
+            onClick={handleMenuToggle}
           >
             <MenuIcon />
           </IconButton>
@@ -81,7 +110,88 @@ export const Navbar = () => {
           </Button>
         </Toolbar>
       </AppBar>
-
+      <Backdrop
+        open={menuToggle}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer - 1,
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <Drawer
+          anchor="left"
+          open={menuToggle}
+          onClose={handleMenuToggle}
+          PaperProps={{
+            sx: (theme) => ({
+              width: "300px",
+              padding: "24px 12px",
+              boxSizing: "border-box",
+              backgroundColor: alpha(theme.palette.primary.main, 0.6),
+            }),
+          }}
+        >
+          <StyledDrawerHeader>
+            <Button
+              onClick={handleMenuToggle}
+              sx={{
+                padding: "8px 16px",
+                border: 1,
+                borderRadius: "24px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "text.primary",
+              }}
+            >
+              <ChevronLeftIcon></ChevronLeftIcon>
+              <Typography variant="button">Close Menu</Typography>
+            </Button>
+          </StyledDrawerHeader>
+          <List sx={{ marginTop: 2 }}>
+            {titles.map((text, i) => (
+              <Box key={`${text}-${i}`}>
+                <ListItem disablePadding>
+                  <Link
+                    to={`${generateLinkPath(text)}`}
+                    onClick={handleMenuToggle}
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                      display: "block",
+                      width: "100%",
+                    }}
+                  >
+                    <ListItemButton
+                      sx={{
+                        ":hover": {
+                          backgroundColor: "transparent",
+                        },
+                      }}
+                    >
+                      <ListItemText
+                        primary={text}
+                        sx={{
+                          ":hover": {
+                            color: "text.secondary",
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+                {i < titles.length - 1 && (
+                  <Divider
+                    sx={{
+                      backgroundColor: grey[600],
+                      my: 0.5,
+                    }}
+                  />
+                )}
+              </Box>
+            ))}
+          </List>
+        </Drawer>
+      </Backdrop>
       {searchToggle ? <SearchBar></SearchBar> : null}
     </Box>
   );
