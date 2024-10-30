@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import Genre from "../components/Genre/Genre";
 import NewAnime12 from "../components/NewAnime/NewAnime12";
 import SpotLightSlder from "../components/SpotLight/SpotLightSlider";
@@ -31,11 +32,31 @@ const HomePage = () => {
               New Episodes
             </Typography>
             <NewAnime12></NewAnime12>
-            <Typography variant="h3" color="text.secondary">
-              Top Upcoming
-            </Typography>
-            <UpcomingAnime12></UpcomingAnime12>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Typography variant="h3" color="text.secondary">
+                Upcoming next season
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  textDecoration: "none",
+                  color: "text.disabled",
+                  ":hover": {
+                    color: "text.primary",
+                  },
+                }}
+                component={Link}
+                to={"/upcoming"}
+              >
+                View all
+              </Typography>
+            </Stack>
 
+            <UpcomingAnime12></UpcomingAnime12>
           </Stack>
           <Stack direction={"column"} spacing={2} flex={{ lg: 1 }}>
             <Typography variant="h3" color="text.secondary">

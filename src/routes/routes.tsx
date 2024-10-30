@@ -15,6 +15,7 @@ import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 import AnimeFormatPage from "../pages/AnimeFormatPage";
+import UpcomingAnimePage from "../pages/UpcomingAnimePage";
 
 const routes = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const routes = createBrowserRouter([
       {
         path: "format/:formatType/:page?",
         element: <AnimeFormatPage></AnimeFormatPage>,
+      },
+      {
+        path: "upcoming/:page?",
+        element: <UpcomingAnimePage></UpcomingAnimePage>,
       },
     ],
   },

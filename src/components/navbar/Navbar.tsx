@@ -20,9 +20,7 @@ import {
 import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MediaFormat } from "../../graphql/types/graphql";
 import { theme } from "../../theme/theme";
-import { generateLinkPath } from "../../utils/utils";
 import SearchBar from "../search/Searchbar";
 import { StyledDrawerHeader } from "../styled components/StyledDrawerHeader";
 
@@ -44,12 +42,12 @@ export const Navbar = () => {
     "MUSIC",
   ];
   const titles = ["Home", "Most Popular", ...FormatType];
-  
+
   const links = [
     "/",
     "most-popular",
-    ...FormatType.map((type) => `/format/${type}`)
-  ]
+    ...FormatType.map((type) => `/format/${type}`),
+  ];
   useEffect(() => {
     setSearchToggle(false);
   }, [location]);
