@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { FuzzyDate, MediafieldsFragment } from "../graphql/types/graphql";
+import { FuzzyDate } from "../graphql/types/graphql";
 
 export const getAiredDate = (
   startDate: FuzzyDate | null | undefined,
