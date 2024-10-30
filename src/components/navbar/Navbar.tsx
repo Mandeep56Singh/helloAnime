@@ -20,6 +20,7 @@ import {
 import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { MediaFormat } from "../../graphql/types/graphql";
 import { theme } from "../../theme/theme";
 import { generateLinkPath } from "../../utils/utils";
 import SearchBar from "../search/Searchbar";
@@ -31,16 +32,24 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  const titles = [
-    "Home",
-    "Most Popular",
-    "Movies",
-    "TV Series",
+  /** The format the media was released in */
+
+  const FormatType = [
+    "TV",
+    "MOVIE",
     "OVA",
     "ONA",
-    "Special",
+    "SPECIAL",
+    "TV_SHORT",
+    "MUSIC",
   ];
-
+  const titles = ["Home", "Most Popular", ...FormatType];
+  
+  const links = [
+    "/",
+    "most-popular",
+    ...FormatType.map((type) => `/format/${type}`)
+  ]
   useEffect(() => {
     setSearchToggle(false);
   }, [location]);
@@ -152,7 +161,7 @@ export const Navbar = () => {
               <Box key={`${text}-${i}`}>
                 <ListItem disablePadding>
                   <Link
-                    to={`${generateLinkPath(text)}`}
+                    to={`${links[i]}`}
                     onClick={handleMenuToggle}
                     style={{
                       textDecoration: "none",

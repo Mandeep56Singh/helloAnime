@@ -9,11 +9,12 @@ import LatestCompleted from "../pages/LatestCompleted";
 import MostFavourites from "../pages/MostFavourites";
 import MostPopular from "../pages/MostPopular";
 import MoviesPage from "../pages/MoviesPage";
+import StudioPage from "../pages/StudioPage";
 import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
-import StudioPage from "../pages/StudioPage";
+import AnimeFormatPage from "../pages/AnimeFormatPage";
 
 const routes = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const routes = createBrowserRouter([
       {
         path: "producer/:studio/:page?",
         element: <StudioPage></StudioPage>,
+      },
+      {
+        path: "format/:formatType/:page?",
+        element: <AnimeFormatPage></AnimeFormatPage>,
       },
     ],
   },
