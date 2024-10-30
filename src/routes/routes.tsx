@@ -17,6 +17,7 @@ import TopAiring from "../pages/TopAiring";
 import TVSeriesPage from "../pages/TVSeriesPage";
 import UpcomingAnimePage from "../pages/UpcomingAnimePage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
+import TopHundredPage from "../pages/TopHundredPage";
 
 const routes = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const routes = createBrowserRouter([
       {
         path: "popular-this-season/:page?",
         element: <PopularThisSeasonPage></PopularThisSeasonPage>,
+      },
+      {
+        path: "top-hundred/:page?",
+        element: <TopHundredPage></TopHundredPage>,
       },
     ],
   },

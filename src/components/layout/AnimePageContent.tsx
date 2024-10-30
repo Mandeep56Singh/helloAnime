@@ -30,10 +30,13 @@ const AnimePageContent: React.FC<props> = ({
   }, [location, page, setCurrentPage]);
 
   return (
-    <Stack direction={"column"} spacing={4}>
-      <Typography variant="h3" color="text.secondary">
-        {title}
-      </Typography>
+    <Stack
+      direction={"column"}
+      spacing={4}
+      sx={{
+        marginTop: 4,
+      }}
+    >
       <Stack
         direction={{
           xs: "column",
@@ -43,10 +46,19 @@ const AnimePageContent: React.FC<props> = ({
       >
         <Stack
           direction={"column"}
-          spacing={4}
+          spacing={2}
           flex={{ lg: 3 }}
           alignItems={"center"}
         >
+          <Typography
+            variant="h3"
+            color="text.secondary"
+            sx={{
+              alignSelf: "self-start",
+            }}
+          >
+            {title}
+          </Typography>
           <AnimeCardGrid AnimeList={animeList || []} />
           <StyledPagination
             count={pageInfo?.hasNextPage ? currentPage + 1 : currentPage}

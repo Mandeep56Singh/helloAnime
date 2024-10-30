@@ -4,6 +4,7 @@ import Genre from "../components/Genre/Genre";
 import PopularThisSeason from "../components/PopularOnSeason/PopularThisSeason";
 import SpotLightSlder from "../components/SpotLight/SpotLightSlider";
 import AnimeTop5 from "../components/Top5/AnimeTop5";
+import TopHundred from "../components/TopHundred/TopHundred";
 import TrendingAnimeSlider from "../components/Trending/TrendingAnimeSlider";
 import UpcomingAnime12 from "../components/Upcoming/UpcomingAnime12";
 
@@ -51,7 +52,7 @@ const HomePage = () => {
                 View all
               </Typography>
             </Stack>
-              <PopularThisSeason></PopularThisSeason>
+            <PopularThisSeason></PopularThisSeason>
             <Stack
               direction={"row"}
               alignItems={"center"}
@@ -78,11 +79,10 @@ const HomePage = () => {
 
             <UpcomingAnime12></UpcomingAnime12>
           </Stack>
-          <Stack direction={"column"} spacing={2} flex={{ lg: 1 }}>
-            <Typography variant="h3" color="text.secondary">
-              Genres
-            </Typography>
+          <Stack direction={"column"} spacing={5} flex={{ lg: 1 }}>
             <Genre></Genre>
+
+            <TopHundred></TopHundred>
           </Stack>
         </Stack>
       </Stack>
