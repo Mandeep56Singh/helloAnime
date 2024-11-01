@@ -7,6 +7,7 @@ import {
 } from "../../graphql/types/graphql";
 import { upcoming } from "../../services/upcoming/queries";
 import AnimeCardGrid from "../layout/AnimeCardGrid";
+import AnimeGridSkeleton from "../Skeletons/AnimeGridSkeleton";
 
 const PopularThisSeason = () => {
   const { loading, error, data } = useQuery<
@@ -21,10 +22,16 @@ const PopularThisSeason = () => {
     },
   });
 
-  if (loading) return <div>loading...</div>;
-  else if (error) return <div>{error.message}</div>;
-  const upcomingAnimeList = data?.Page?.media as MediafieldsFragment[];
-  return <AnimeCardGrid AnimeList={upcomingAnimeList || []}></AnimeCardGrid>;
+  if (error) return <div>{error.message}</div>;
+  const animeList = data?.Page?.media as MediafieldsFragment[];
+  return loading ? (
+    <AnimeGridSkeleton></AnimeGridSkeleton>
+  ) : (
+    <AnimeCardGrid
+      loading={loading}
+      AnimeList={animeList || []}
+    ></AnimeCardGrid>
+  );
 };
 
 export default PopularThisSeason;

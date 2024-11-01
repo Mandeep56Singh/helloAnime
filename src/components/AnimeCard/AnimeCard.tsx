@@ -1,27 +1,27 @@
 import MovieIcon from "@mui/icons-material/Movie";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { green } from "@mui/material/colors";
 import { Box, Stack } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
 import { MediafieldsFragment } from "../../graphql/types/graphql";
+import { useSkeletonLoading } from "../../hooks/useSkeletonLoading";
 import { getTimeDuration } from "../../utils/utils";
+
 type AnimeCardProps = {
   data: MediafieldsFragment;
+  loading: boolean;
 };
-const AnimeCard: React.FC<AnimeCardProps> = ({ data }) => {
+const AnimeCard: React.FC<AnimeCardProps> = ({ data, loading }) => {
   const timeDuration = getTimeDuration(data.duration);
-
+  const loaded = useSkeletonLoading(loading);
   return (
     <Card
       elevation={0}
       sx={{
         borderRadius: "0",
+        opacity: loaded ? 1 : 0,
+        transition: "opacity 0.3s ease-in-out",
       }}
     >
       <>
