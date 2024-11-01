@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Box, Skeleton, Stack, Typography, useTheme } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { TrendingAnimeQuery } from "../../graphql/types/graphql";
+import { useSkeletonLoading } from "../../hooks/useSkeletonLoading";
 import { TrendingAnime } from "../../services/Trending/queries";
 import { StyledChevronButton } from "../styled components/StyledChevronButton";
 
@@ -18,7 +19,7 @@ const TrendingAnimeSlider = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const swiperRef = useRef<any>(null);
   const theme = useTheme();
-    const [loaded, setLoaded] = useState(false); 
+  const loaded = useSkeletonLoading(loading);
 
   const handlePrev = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -31,13 +32,8 @@ const TrendingAnimeSlider = () => {
       swiperRef.current.swiper.slideNext();
     }
   };
-  
-   useEffect(() => {
-     if (!loading) {
-       setLoaded(true);
-     }
-   }, [loading]);
-  if(error) return <div>{error.cause?.message}</div>
+
+  if (error) return <div>{error.cause?.message}</div>;
   const trendingAnimeList = data?.Page?.media;
 
   return (
@@ -106,8 +102,8 @@ const TrendingAnimeSlider = () => {
                       height: "auto",
                       display: "inline-block",
                       overflow: "hidden",
-                      opacity: !loaded ? 0 : 1, 
-                      transition: "opacity 0.5s ease-in-out",
+                      opacity: loaded ? 1 : 0,
+                      transition: "opacity 0.3s ease-in-out",
                     }}
                   >
                     <Stack

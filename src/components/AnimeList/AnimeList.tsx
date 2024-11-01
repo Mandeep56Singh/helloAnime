@@ -20,9 +20,10 @@ type Props = {
   data: AnimeListItemFragment[];
   loading: boolean;
   error?: boolean;
+  limit?: number;
 };
 
-const AnimeList: React.FC<Props> = ({ loading, data }) => {
+const AnimeList: React.FC<Props> = ({ loading, data, limit = 5 }) => {
   const loaded = useSkeletonLoading(loading);
 
   return (
@@ -32,7 +33,7 @@ const AnimeList: React.FC<Props> = ({ loading, data }) => {
       }}
     >
       {loading
-        ? Array.from(new Array(5)).map((_, index) => (
+        ? Array.from(new Array(limit)).map((_, index) => (
             <>
               <AnimeListSkeleton key={index}></AnimeListSkeleton>
             </>

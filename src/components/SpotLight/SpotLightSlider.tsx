@@ -57,6 +57,7 @@ const SpotLightSlder = () => {
         {spotlightAnimeData?.map((anime, index) => (
           <SwiperSlide key={anime?.id}>
             <SpotLightAnime
+              loading={loading}
               img={anime?.bannerImage}
               title={anime?.title?.english || anime?.title?.romaji}
               spotNumber={index + 1}

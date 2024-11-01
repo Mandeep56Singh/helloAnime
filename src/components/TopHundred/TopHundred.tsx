@@ -1,29 +1,28 @@
 import { useQuery } from "@apollo/client";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import {
   AnimeListItemFragment,
   TopHundredQuery,
   TopHundredQueryVariables,
 } from "../../graphql/types/graphql";
-import AnimeList from "../AnimeList/AnimeList";
 import { topHundred } from "../../services/topHundred/queries";
-import { Link } from "react-router-dom";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import AnimeList from "../AnimeList/AnimeList";
 
 const TopHundred = () => {
+  const PER_PAGE_LIMIT = 18;
   const { loading, error, data } = useQuery<
     TopHundredQuery,
     TopHundredQueryVariables
   >(topHundred, {
     variables: {
       page: 1,
-      perPage: 18,
-
+      perPage: PER_PAGE_LIMIT,
     },
   });
-  if (loading) {
-    return <div>Loading</div>;
-  } else if (error) {
+
+  if (error) {
     return <div>{error.message}</div>;
   }
   const animeList = data?.Page?.media as AnimeListItemFragment[];
@@ -33,7 +32,11 @@ const TopHundred = () => {
       <Typography variant="h3" color="text.secondary">
         Top Hundred
       </Typography>
-      <AnimeList data={animeList || []}></AnimeList>
+      <AnimeList
+        limit={PER_PAGE_LIMIT}
+        data={animeList || []}
+        loading={loading}
+      ></AnimeList>
       <Stack
         direction={"row"}
         spacing={1}

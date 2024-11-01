@@ -1,5 +1,5 @@
 import { Box, Skeleton, Stack } from "@mui/material";
-import Typographskeleton from "./Typographskeleton";
+import TypographySkeleton from "./Typographyskeleton";
 
 const AnimeCardSkeleton = () => {
   return (
@@ -17,8 +17,8 @@ const AnimeCardSkeleton = () => {
           padding: "8px 0px",
         }}
       >
-        <Typographskeleton typographyVariant="subtitle1"></Typographskeleton>
-        <Typographskeleton typographyVariant="caption"></Typographskeleton>
+        <TypographySkeleton typographyVariant="subtitle1"></TypographySkeleton>
+        <TypographySkeleton typographyVariant="caption"></TypographySkeleton>
       </Box>
     </Stack>
   );
