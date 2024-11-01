@@ -146,5 +146,15 @@ export const theme = responsiveFontSizes(
         xl: 1300,
       },
     },
+    components: {
+      MuiSkeleton: {
+        defaultProps : {
+           animation:"pulse"
+        },
+        styleOverrides : {
+
+        }
+      }
+    }
   })
 );

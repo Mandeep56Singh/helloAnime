@@ -10,19 +10,22 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SpotlightAnimeQuery } from "../../graphql/types/graphql";
 import { spotlightAnime } from "../../services/spotlight/queries";
+import SpotLightSkeleton from "../Skeletons/SpotLightSkeleton";
 import { StyledChevronButton } from "../styled components/StyledChevronButton";
 import SpotLightAnime from "./SpotLightAnime";
 
 const SpotLightSlder = () => {
-  const { loading, error, data } = useQuery<SpotlightAnimeQuery>(
-    spotlightAnime,
-    
-  );
+  const { loading, error, data } =
+    useQuery<SpotlightAnimeQuery>(spotlightAnime);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const swiperRef = useRef<any>(null);
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <Box position={"relative"} sx={{ marginInline: -2 }}>
+        <SpotLightSkeleton></SpotLightSkeleton>
+      </Box>
+    );
   } else if (error) {
     return <div>{error.message}</div>;
   }
