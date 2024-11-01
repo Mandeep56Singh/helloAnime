@@ -15,6 +15,7 @@ import { StyledChevronButton } from "../styled components/StyledChevronButton";
 
 const TrendingAnimeSlider = () => {
   const { loading, error, data } = useQuery<TrendingAnimeQuery>(TrendingAnime);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const swiperRef = useRef<any>(null);
   const theme = useTheme();
     const [loaded, setLoaded] = useState(false); 
@@ -105,7 +106,7 @@ const TrendingAnimeSlider = () => {
                       height: "auto",
                       display: "inline-block",
                       overflow: "hidden",
-                      opacity: !loaded ? 0 : 1, // Apply opacity based on load state
+                      opacity: !loaded ? 0 : 1, 
                       transition: "opacity 0.5s ease-in-out",
                     }}
                   >

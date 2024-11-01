@@ -2,14 +2,14 @@ import { useQuery } from "@apollo/client";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Grid2, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { AnimeListOf5Query } from "../../graphql/types/graphql";
+import {
+  AnimeListItemFragment,
+  AnimeListOf5Query,
+} from "../../graphql/types/graphql";
 import { AnimeOf5 } from "../../services/animeOf5/queries";
 import AnimeList from "../AnimeList/AnimeList";
 const AnimeTop5 = () => {
   const { loading, error, data } = useQuery<AnimeListOf5Query>(AnimeOf5);
-
-  if (loading) return "loading...";
-  else if (error) return <div>{error.message}</div>;
 
   const TopAiring = data?.topAiringAnime5?.media;
   const TopFavorites = data?.mostFavoritedAnime5?.media;
@@ -22,6 +22,9 @@ const AnimeTop5 = () => {
     "Latest Completed",
     "Most Popular",
   ];
+
+  if (error) return <div>{error.message}</div>;
+
   return (
     <Grid2 container spacing={3}>
       {TopAnime5List.map((listData, i) => (
@@ -36,7 +39,10 @@ const AnimeTop5 = () => {
             <Typography variant="h5" color="text.secondary">
               {ListItemNames[i]}
             </Typography>
-            <AnimeList data={listData || []}></AnimeList>
+            <AnimeList
+              data={(listData as AnimeListItemFragment[]) || []}
+              loading={loading}
+            ></AnimeList>
             <Stack
               direction={"row"}
               spacing={1}
