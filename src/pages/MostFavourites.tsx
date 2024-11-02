@@ -37,7 +37,6 @@ const MostFavourites = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.media as MediafieldsFragment[];
@@ -50,6 +49,8 @@ const MostFavourites = () => {
       animeList={list || []}
       baseRoute="/most-favourites"
       setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
     />
   );
 };
