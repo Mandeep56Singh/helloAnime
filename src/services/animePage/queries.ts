@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import { MediaFields } from "../fragments/mediafields";
 export const animePage = gql`
   ${MediaFields}
-  query getAnimeById($mediaId: Int) {
+  query getAnimeById($mediaId: Int!) {
     Media(id: $mediaId) {
       id
       __typename

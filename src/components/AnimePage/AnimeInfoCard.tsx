@@ -6,9 +6,7 @@ import {
   Button,
   CardActions,
   CardContent,
-  CardMedia,
   Stack,
-  styled,
   Typography,
 } from "@mui/material";
 import { green } from "@mui/material/colors";
@@ -16,19 +14,12 @@ import React from "react";
 import { GetAnimeByIdQuery } from "../../graphql/types/graphql";
 import { getTimeDuration } from "../../utils/utils";
 import { StyledCard } from "../styled components/StyledCard";
+import { StyledCardMedia } from "../styled components/StyledCardMedia";
 
 type Media = NonNullable<GetAnimeByIdQuery["Media"]>;
 type AnimeInfoCardProps = {
   data: Media;
 };
-const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
-  width: "160px",
-  [theme.breakpoints.up("sm")]: {
-    width: "190px",
-  },
-  objectFit: "contain",
-  aspectRatio: "0.7",
-}));
 
 const AnimeInfoCard: React.FC<AnimeInfoCardProps> = ({ data }) => {
   const timeDuration = getTimeDuration(data.duration);

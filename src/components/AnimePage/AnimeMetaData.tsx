@@ -10,7 +10,7 @@ type AnimeMetaDataProps = {
 const AnimeMetaData: React.FC<AnimeMetaDataProps> = ({ data }) => {
   const aired = getAiredDate(data.startDate, data.endDate);
   const timeDuration = getTimeDuration(data.duration);
-  // const producer = data.studios?.edges?.[0]?.node?.name;
+ 
   const studios = data.studios?.edges;
   return (
     <Box

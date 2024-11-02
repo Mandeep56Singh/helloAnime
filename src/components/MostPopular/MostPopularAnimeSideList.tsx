@@ -17,9 +17,7 @@ const MostPopularAnimeSideList = () => {
       perPage: 10,
     },
   });
-  if (loading) {
-    return <div>Loading</div>;
-  } else if (error) {
+ if (error) {
     return <div>{error.message}</div>;
   }
   const mostPopular10Data = data?.Page?.media;
@@ -29,7 +27,7 @@ const MostPopularAnimeSideList = () => {
       <Typography variant="h3" color="text.secondary">
         Most Popular
       </Typography>
-      <AnimeList data={mostPopular10Data}></AnimeList>
+      <AnimeList data={mostPopular10Data} loading={loading}></AnimeList>
     </Stack>
   );
 };

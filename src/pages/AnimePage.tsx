@@ -5,11 +5,13 @@ import AnimeInfoCard from "../components/AnimePage/AnimeInfoCard";
 import AnimeMetaData from "../components/AnimePage/AnimeMetaData";
 import AnimeCardGrid from "../components/layout/AnimeCardGrid";
 import MostPopularAnimeSideList from "../components/MostPopular/MostPopularAnimeSideList";
+import AnimePageSkeleton from "../components/Skeletons/AnimePageSkeleton";
 import {
   GetAnimeByIdQuery,
   GetAnimeByIdQueryVariables,
   MediafieldsFragment,
 } from "../graphql/types/graphql";
+import { useSkeletonLoading } from "../hooks/useSkeletonLoading";
 import { animePage } from "../services/animePage/queries";
 const AnimePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,9 +21,9 @@ const AnimePage = () => {
   >(animePage, {
     variables: { mediaId: Number(id) },
   });
-
+  const loaded = useSkeletonLoading(loading);
   if (loading) {
-    return <div>Loading</div>;
+    return <AnimePageSkeleton></AnimePageSkeleton>;
   } else if (data) {
     const animeData = data.Media!;
     const recommendedAnime = data.Media?.recommendations?.edges;
@@ -34,10 +36,11 @@ const AnimePage = () => {
     return (
       <Box
         sx={{
-          padding: "14px",
           display: "flex",
           flexDirection: "column",
           gap: 4,
+          opacity: loaded ? 1:0,
+          transition: "opacity 0.3s ease-in-out"
         }}
       >
         <Stack
@@ -64,7 +67,10 @@ const AnimePage = () => {
             <Typography variant="h3" color="text.secondary">
               Recommended for you
             </Typography>
-            <AnimeCardGrid AnimeList={recommendedAnimeData}></AnimeCardGrid>
+            <AnimeCardGrid
+              AnimeList={recommendedAnimeData}
+              loading={loading}
+            ></AnimeCardGrid>
           </Stack>
           <MostPopularAnimeSideList></MostPopularAnimeSideList>
         </Stack>

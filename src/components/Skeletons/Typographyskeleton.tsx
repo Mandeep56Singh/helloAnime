@@ -4,11 +4,12 @@ import React from "react";
 type props = {
   typographyVariant?: TypographyProps["variant"];
   sx?: SxProps;
+  children?:React.ReactNode
 };
-const TypographySkeleton: React.FC<props> = ({ typographyVariant, sx }) => {
+const TypographySkeleton: React.FC<props> = ({ typographyVariant, sx,children }) => {
   return (
     <Typography variant={typographyVariant} sx={sx}>
-      <Skeleton variant="text"></Skeleton>
+      <Skeleton variant="text">{children}</Skeleton>
     </Typography>
   );
 };
