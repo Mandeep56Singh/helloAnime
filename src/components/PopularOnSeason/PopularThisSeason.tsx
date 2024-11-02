@@ -10,13 +10,14 @@ import AnimeCardGrid from "../layout/AnimeCardGrid";
 import AnimeGridSkeleton from "../Skeletons/AnimeGridSkeleton";
 
 const PopularThisSeason = () => {
+  const PER_PAGE_LIMIT = 12;
   const { loading, error, data } = useQuery<
     UpcomingQuery,
     UpcomingQueryVariables
   >(upcoming, {
     variables: {
       page: 1,
-      perPage: 12,
+      perPage: PER_PAGE_LIMIT,
       seasonYear: 2024,
       season: "FALL" as MediaSeason,
     },
@@ -25,7 +26,7 @@ const PopularThisSeason = () => {
   if (error) return <div>{error.message}</div>;
   const animeList = data?.Page?.media as MediafieldsFragment[];
   return loading ? (
-    <AnimeGridSkeleton></AnimeGridSkeleton>
+    <AnimeGridSkeleton limit={PER_PAGE_LIMIT}></AnimeGridSkeleton>
   ) : (
     <AnimeCardGrid
       loading={loading}
