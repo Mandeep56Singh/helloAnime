@@ -3,22 +3,21 @@ import { v4 as uuidv4 } from "uuid";
 import AnimeCardSkeleton from "./AnimeCardSkeleton";
 
 type props = {
-  limit?: number;
+  limit: number;
 };
 
 const AnimeGridSkeleton: React.FC<props> = ({ limit }) => {
   const uniqueId = uuidv4();
   return (
     <Grid2 container spacing={2}>
-      {Array.from(new Array(limit)).map(() => (
+      {Array.from(new Array(limit)).map((_, i) => (
         <Grid2
-          className="helloB"
           size={{
             xs: 6,
             sm: 4,
             md: 3,
           }}
-          key={uniqueId}
+          key={`${uniqueId}*${i}`}
         >
           <AnimeCardSkeleton></AnimeCardSkeleton>
         </Grid2>

@@ -1,8 +1,9 @@
-import { PaginationItem, Stack, Typography } from "@mui/material";
+import { Box, PaginationItem, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { MediafieldsFragment, PageInfo } from "../../graphql/types/graphql";
 import Genre from "../Genre/Genre";
+import AnimeGridSkeleton from "../Skeletons/AnimeGridSkeleton";
 import { StyledPagination } from "../styled components/StyledPagination";
 import AnimeCardGrid from "./AnimeCardGrid";
 
@@ -12,6 +13,8 @@ type props = {
   pageInfo: PageInfo | null;
   baseRoute: string;
   setCurrentPage: (page: number) => void;
+  loading: boolean;
+  limit: number;
 };
 
 const AnimePageContent: React.FC<props> = ({
@@ -20,6 +23,8 @@ const AnimePageContent: React.FC<props> = ({
   pageInfo,
   baseRoute,
   setCurrentPage,
+  loading,
+  limit,
 }) => {
   const currentPage = pageInfo?.currentPage as number;
   const location = useLocation();
@@ -59,7 +64,17 @@ const AnimePageContent: React.FC<props> = ({
           >
             {title}
           </Typography>
-          <AnimeCardGrid AnimeList={animeList || []} />
+          <Box
+            sx={{
+              width: "100%",
+            }}
+          >
+            {loading ? (
+              <AnimeGridSkeleton limit={limit}></AnimeGridSkeleton>
+            ) : (
+              <AnimeCardGrid AnimeList={animeList || []} loading={loading} />
+            )}
+          </Box>
           <StyledPagination
             count={pageInfo?.hasNextPage ? currentPage + 1 : currentPage}
             page={currentPage || 1}

@@ -37,20 +37,23 @@ const TopAiring = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.media as MediafieldsFragment[];
   const pageInfo = data?.Page?.pageInfo as PageInfo;
 
   return (
-    <AnimePageContent
-      title="Top Airing"
-      pageInfo={pageInfo}
-      animeList={list || []}
-      baseRoute="/top-airing"
-      setCurrentPage={setCurrentPage}
-    />
+    <>
+      <AnimePageContent
+        title="Top Airing"
+        pageInfo={pageInfo}
+        animeList={list || []}
+        baseRoute="/top-airing"
+        setCurrentPage={setCurrentPage}
+        loading={loading}
+        limit={PER_PAGE_LIMIT}
+      />
+    </>
   );
 };
 
