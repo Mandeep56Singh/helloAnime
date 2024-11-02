@@ -36,7 +36,6 @@ const TopHundredPage = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.media as MediafieldsFragment[];
@@ -49,6 +48,8 @@ const TopHundredPage = () => {
       animeList={list || []}
       baseRoute="/top-hundred"
       setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
     />
   );
 };

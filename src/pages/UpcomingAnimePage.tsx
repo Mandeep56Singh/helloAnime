@@ -40,7 +40,6 @@ const UpcomingAnimePage = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.media as MediafieldsFragment[];
@@ -53,6 +52,8 @@ const UpcomingAnimePage = () => {
       animeList={list || []}
       baseRoute="/upcoming"
       setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
     />
   );
 };

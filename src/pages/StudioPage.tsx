@@ -38,7 +38,6 @@ const StudioPage = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.studios![0]?.media?.nodes as MediafieldsFragment[];
@@ -52,6 +51,8 @@ const StudioPage = () => {
       animeList={list || []}
       baseRoute={`/producer/${studio}`}
       setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
     />
   );
 };
