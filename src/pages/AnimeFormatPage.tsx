@@ -39,7 +39,7 @@ const FormatPage = () => {
     });
   }, [currentPage, refetch]);
 
-  if (loading) return <div>Loading...</div>;
+
   if (error) return <div>{error.message}</div>;
 
   const list = data?.Page?.media as MediafieldsFragment[];
@@ -52,6 +52,8 @@ const FormatPage = () => {
       animeList={list || []}
       baseRoute={`/format/${formatType}`}
       setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
     />
   );
 };
