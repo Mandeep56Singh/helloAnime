@@ -29,7 +29,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ data, loading }) => {
           <Link to={`/anime/${data.id}`}>
             <CardMedia
               component={"img"}
-              image={`${data.coverImage?.large}`}
+              image={`${data.coverImage?.extraLarge}`}
               alt="Anime-Card"
               sx={{
                 cursor: "pointer",
