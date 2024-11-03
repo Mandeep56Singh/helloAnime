@@ -12,6 +12,7 @@ export const MediaFields = gql`
       __typename
       large
       medium
+      extraLarge
     }
     duration
     status

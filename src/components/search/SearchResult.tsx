@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import {
   Box,
-  Button,
   CircularProgress,
   Divider,
   Stack,
@@ -9,7 +8,10 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
+  InputMaybe,
   MediafieldsFragment,
+  MediaSort,
+  MediaType,
   SearchAnimeQuery,
   SearchAnimeQueryVariables,
 } from "../../graphql/types/graphql";
@@ -20,13 +22,22 @@ type SearchResultProps = {
 };
 
 const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
-  console.log(searchQuery, "search value for searchResult");
+  const PER_PAGE_LIMIT = 5;
+  const sort = "SEARCH_MATCH" as
+    | InputMaybe<InputMaybe<MediaSort> | InputMaybe<MediaSort>[]>
+    | undefined;
   const { loading, error, data } = useQuery<
     SearchAnimeQuery,
     SearchAnimeQueryVariables
   >(SearchAnime, {
     skip: !searchQuery || searchQuery.trim().length <= 2,
-    variables: { search: searchQuery, type: "ANIME" },
+    variables: {
+      search: searchQuery,
+      page: 1,
+      perPage: PER_PAGE_LIMIT,
+      sort: sort,
+      type: "ANIME" as InputMaybe<MediaType> | undefined,
+    },
   });
 
   if (loading) {
@@ -65,23 +76,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
       </Box>
     );
   } else if (data) {
-    const media = data?.Media as MediafieldsFragment;
-    const remainingMediaItem = data?.Media?.relations
-      ?.nodes as unknown as MediafieldsFragment;
-    const firstItem = {
-      id: media.id,
-      title: media.title,
-      coverImage: media.coverImage?.extraLarge,
-      format: media.format,
-      status: media.status,
-      episodes: media.episodes,
-      duration: media.duration,
-    };
-
-    const result: MediafieldsFragment[] = [
-      firstItem,
-      ...(remainingMediaItem || []),
-    ];
+    const result = data.Page?.media as MediafieldsFragment[];
 
     return (
       <>
@@ -98,7 +93,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchQuery }) => {
             ></Divider>
           }
         >
-          {result.slice(0, 5).map((value) => (
+          {result.map((value) => (
             <SearchAnimeItem data={value} key={value?.id}></SearchAnimeItem>
           ))}
         </Stack>

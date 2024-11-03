@@ -50,7 +50,7 @@ const routes = createBrowserRouter([
         element: <TVSeriesPage></TVSeriesPage>,
       },
       {
-        path: "search/:searchQuery",
+        path: "search/:searchQuery/:page?",
         element: <ViewAllSearchResultPage></ViewAllSearchResultPage>,
       },
       {

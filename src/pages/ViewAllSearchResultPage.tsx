@@ -1,48 +1,68 @@
 import { useQuery } from "@apollo/client";
-import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AnimeCardGrid from "../components/layout/AnimeCardGrid";
+import AnimePageContent from "../components/layout/AnimePageContent";
 import {
+  InputMaybe,
   MediafieldsFragment,
+  MediaSort,
+  MediaType,
+  PageInfo,
   SearchAnimeQuery,
   SearchAnimeQueryVariables,
 } from "../graphql/types/graphql";
 import { SearchAnime } from "../services/search/queries";
+
 const ViewAllSearchResultPage = () => {
-  const { searchQuery } = useParams();
-  const { loading, error, data } = useQuery<
+  const { searchQuery, page } = useParams();
+
+  const [currentPage, setCurrentPage] = useState<number>(
+    page ? Number(page) : 1
+  );
+  const PER_PAGE_LIMIT = 40;
+
+  const sort = "SEARCH_MATCH" as
+    | InputMaybe<InputMaybe<MediaSort> | InputMaybe<MediaSort>[]>
+    | undefined;
+
+  const { loading, error, data, refetch } = useQuery<
     SearchAnimeQuery,
     SearchAnimeQueryVariables
   >(SearchAnime, {
     skip: !searchQuery || searchQuery.trim().length <= 2,
-    variables: { search: searchQuery, type: "ANIME" },
+    variables: {
+      search: searchQuery,
+      page: currentPage,
+      perPage: PER_PAGE_LIMIT,
+      sort: sort,
+      type: "ANIME" as InputMaybe<MediaType> | undefined,
+    },
+    notifyOnNetworkStatusChange: true,
   });
-  const media = data?.Media as MediafieldsFragment;
-  const remainingMediaItem = data?.Media?.relations
-    ?.nodes as unknown as MediafieldsFragment;
-  const firstItem = {
-    id: media.id,
-    title: media.title,
-    coverImage: media.coverImage?.large,
-    format: media.format,
-    status: media.status,
-    episodes: media.episodes,
-    duration: media.duration,
-  };
 
-  const result: MediafieldsFragment[] = [
-    firstItem,
-    ...(remainingMediaItem || []),
-  ];
+  useEffect(() => {
+    refetch({
+      page: currentPage,
+      perPage: PER_PAGE_LIMIT,
+    });
+  }, [currentPage, refetch]);
+
+  if (error) return <div>{error.message}</div>;
+
+  const result = data?.Page?.media as MediafieldsFragment[];
+  const pageInfo = data?.Page?.pageInfo as PageInfo;
+  console.log(result, "search result");
+
   return (
-    <Stack spacing={1}>
-      <Typography color="text.secondary" variant="h5">
-        Search Results for:<i> {searchQuery}</i>
-      </Typography>
-      <AnimeCardGrid AnimeList={result}></AnimeCardGrid>
-
-    </Stack>
+    <AnimePageContent
+      title={`Search Results for: ${searchQuery}`}
+      animeList={result || []}
+      pageInfo={pageInfo}
+      baseRoute={`/search/${searchQuery}`}
+      setCurrentPage={setCurrentPage}
+      loading={loading}
+      limit={PER_PAGE_LIMIT}
+    ></AnimePageContent>
   );
 };
 
