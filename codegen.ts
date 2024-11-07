@@ -5,12 +5,11 @@ const config: CodegenConfig = {
   schema: "https://graphql.anilist.co",
   documents: "src/services/**/*.ts",
   generates: {
-    "./src/graphql/types/": {
-      preset: "client",
+    "./src/graphql/types/graphql.ts": {
+      // preset: "client",
       plugins: [
         "typescript", // Generates TypeScript types
         "typescript-operations",
-        "typed-document-node",
       ],
       presetConfig: {
         gqlTagName: "gql",
