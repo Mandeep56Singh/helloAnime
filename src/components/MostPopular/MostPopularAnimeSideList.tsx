@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Stack, Typography } from "@mui/material";
 import {
+  AnimeListItemFragment,
   MostPopularQuery,
   MostPopularQueryVariables,
 } from "../../graphql/types/graphql";
@@ -17,10 +18,10 @@ const MostPopularAnimeSideList = () => {
       perPage: 10,
     },
   });
- if (error) {
+  if (error) {
     return <div>{error.message}</div>;
   }
-  const mostPopular10Data = data?.Page?.media;
+  const mostPopular10Data = data?.Page?.media as AnimeListItemFragment[];
 
   return (
     <Stack direction={"column"} spacing={2}>

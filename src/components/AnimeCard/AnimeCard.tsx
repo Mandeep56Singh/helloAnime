@@ -59,7 +59,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ data, loading }) => {
             ></MovieIcon>
             <Typography
               variant="button"
-              color="text.dark.primary"
+              color="#000"
               sx={{
                 fontSize: "12px",
               }}

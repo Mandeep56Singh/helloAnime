@@ -2,22 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import AnimeFormatPage from "../pages/AnimeFormatPage";
 import AnimePage from "../pages/AnimePage";
-import DubbedAnimePage from "../pages/DubbedAnimePage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import LatestCompleted from "../pages/LatestCompleted";
 import MostFavourites from "../pages/MostFavourites";
 import MostPopular from "../pages/MostPopular";
-import MoviesPage from "../pages/MoviesPage";
 import PopularThisSeasonPage from "../pages/PopularThisSeasonPage";
 import StudioPage from "../pages/StudioPage";
-import SubbedAnimePage from "../pages/SubbedAnimePage";
 import TopAiring from "../pages/TopAiring";
-import TVSeriesPage from "../pages/TVSeriesPage";
+import TopHundredPage from "../pages/TopHundredPage";
 import UpcomingAnimePage from "../pages/UpcomingAnimePage";
 import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
-import TopHundredPage from "../pages/TopHundredPage";
 
 const routes = createBrowserRouter([
   {
@@ -30,25 +26,10 @@ const routes = createBrowserRouter([
         element: <HomePage></HomePage>,
       },
       {
-        path: "subbed-anime",
-        element: <SubbedAnimePage></SubbedAnimePage>,
-      },
-      {
-        path: "dubbed-anime",
-        element: <DubbedAnimePage></DubbedAnimePage>,
-      },
-      {
-        path: "movies",
-        element: <MoviesPage></MoviesPage>,
-      },
-      {
         path: "genre/:type/:page?",
         element: <GenrePage></GenrePage>,
       },
-      {
-        path: "tv-series",
-        element: <TVSeriesPage></TVSeriesPage>,
-      },
+
       {
         path: "search/:searchQuery/:page?",
         element: <ViewAllSearchResultPage></ViewAllSearchResultPage>,

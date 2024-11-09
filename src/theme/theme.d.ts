@@ -7,4 +7,10 @@ declare module "@mui/material/styles" {
     xl: true;
     xxl: false;
   }
+  interface genreColors {
+    [key: string]: string;
+  }
+  interface spacing {
+    [key:string] : string
+  }
 }

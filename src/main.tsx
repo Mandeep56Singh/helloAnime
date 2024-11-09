@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom";
 
 import client from "./graphql/api.ts";
 import routes from "./routes/routes.tsx";
-import { theme } from "./theme/theme.ts";
+import { theme } from "./theme/theme.js";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
