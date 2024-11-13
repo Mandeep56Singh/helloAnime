@@ -1,5 +1,56 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 
+declare module "@mui/material/styles/createPalette" {
+  interface Palette {
+    genreColors: {
+      lightGreen: string;
+      pink: string;
+      orange: string;
+      lightPurple: string;
+      lightBlue: string;
+      purple: string;
+      green: string;
+      teal: string;
+      purplePink: string;
+      red: string;
+      yellowGreen: string;
+      orangeRed: string;
+      pinkishRed: string;
+    };
+    spacing: {
+      textPadding: string;
+    };
+  }
+  interface PaletteOptions {
+    genreColors: {
+      lightGreen: string;
+      pink: string;
+      orange: string;
+      lightPurple: string;
+      lightBlue: string;
+      purple: string;
+      green: string;
+      teal: string;
+      purplePink: string;
+      red: string;
+      yellowGreen: string;
+      orangeRed: string;
+      pinkishRed: string;
+    };
+    spacing: {
+      textPadding: string;
+    };
+  }
+  interface TypeBackground {
+    transparent: string;
+  }
+  interface TypeText {
+    dark: {
+      primary: string;
+    };
+  }
+}
+
 export const theme = responsiveFontSizes(
   createTheme({
     palette: {
@@ -18,7 +69,7 @@ export const theme = responsiveFontSizes(
       background: {
         default: "#2D2B44",
         paper: "#999999",
-        transparent:"rgba(255,255,255,.1)",
+        transparent: "rgba(255,255,255,.1)",
       },
       spacing: {
         textPadding: "4px 8px",
@@ -34,9 +85,7 @@ export const theme = responsiveFontSizes(
 
       action: {
         hover: "#FFBADE",
-       
       },
-
       genreColors: {
         lightGreen: "#A8E6CF",
         pink: "#FF8B94",
@@ -148,13 +197,11 @@ export const theme = responsiveFontSizes(
     },
     components: {
       MuiSkeleton: {
-        defaultProps : {
-           animation:"pulse"
+        defaultProps: {
+          animation: "pulse",
         },
-        styleOverrides : {
-
-        }
-      }
-    }
+        styleOverrides: {},
+      },
+    },
   })
 );

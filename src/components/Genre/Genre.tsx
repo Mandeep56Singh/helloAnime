@@ -11,6 +11,7 @@ const Genre = () => {
     useQuery<GenreCollectionQuery>(genreCollection);
   const theme = useTheme();
   const genreColorsArray = Object.values(theme.palette.genreColors);
+  console.log(theme, "Theme object");
   const genrelist = data?.GenreCollection;
   const loaded = useSkeletonLoading(loading);
   if (error) return <div>{error.message}</div>;
