@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
+import PageTitle from "../components/PageTitle";
 import AnimeFormatPage from "../pages/AnimeFormatPage";
 import AnimePage from "../pages/AnimePage";
 import ErrorPage from "../pages/ErrorPage";
@@ -18,61 +19,125 @@ import ViewAllSearchResultPage from "../pages/ViewAllSearchResultPage";
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
-    errorElement: <ErrorPage></ErrorPage>,
+    element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <HomePage></HomePage>,
+        element: (
+          <>
+            <PageTitle title="Watch Anime Online - Home" />
+            <HomePage />
+          </>
+        ),
       },
       {
         path: "genre/:type/:page?",
-        element: <GenrePage></GenrePage>,
+        element: (
+          <>
+            <PageTitle title="Browse Anime by Genre" />
+            <GenrePage />
+          </>
+        ),
       },
-
       {
         path: "search/:searchQuery/:page?",
-        element: <ViewAllSearchResultPage></ViewAllSearchResultPage>,
+        element: (
+          <>
+            <PageTitle title="Search Results" />
+            <ViewAllSearchResultPage />
+          </>
+        ),
       },
       {
         path: "anime/:id",
-        element: <AnimePage></AnimePage>,
+        element: (
+          <>
+            <PageTitle title="Anime Details" />
+            <AnimePage />
+          </>
+        ),
       },
       {
         path: "most-popular/:page?",
-        element: <MostPopular></MostPopular>,
+        element: (
+          <>
+            <PageTitle title="Most Popular Anime" />
+            <MostPopular />
+          </>
+        ),
       },
       {
         path: "top-airing/:page?",
-        element: <TopAiring></TopAiring>,
+        element: (
+          <>
+            <PageTitle title="Top Airing Anime" />
+            <TopAiring />
+          </>
+        ),
       },
       {
         path: "latest-completed/:page?",
-        element: <LatestCompleted></LatestCompleted>,
+        element: (
+          <>
+            <PageTitle title="Latest Completed Anime" />
+            <LatestCompleted />
+          </>
+        ),
       },
       {
         path: "most-favourites/:page?",
-        element: <MostFavourites></MostFavourites>,
+        element: (
+          <>
+            <PageTitle title="Most Favourite Anime" />
+            <MostFavourites />
+          </>
+        ),
       },
       {
         path: "producer/:studio/:page?",
-        element: <StudioPage></StudioPage>,
+        element: (
+          <>
+            <PageTitle title="Anime by Studio" />
+            <StudioPage />
+          </>
+        ),
       },
       {
         path: "format/:formatType/:page?",
-        element: <AnimeFormatPage></AnimeFormatPage>,
+        element: (
+          <>
+            <PageTitle title="Browse Anime Formats" />
+            <AnimeFormatPage />
+          </>
+        ),
       },
       {
         path: "upcoming/:page?",
-        element: <UpcomingAnimePage></UpcomingAnimePage>,
+        element: (
+          <>
+            <PageTitle title="Upcoming Anime" />
+            <UpcomingAnimePage />
+          </>
+        ),
       },
       {
         path: "popular-this-season/:page?",
-        element: <PopularThisSeasonPage></PopularThisSeasonPage>,
+        element: (
+          <>
+            <PageTitle title="Popular Anime This Season" />
+            <PopularThisSeasonPage />
+          </>
+        ),
       },
       {
         path: "top-hundred/:page?",
-        element: <TopHundredPage></TopHundredPage>,
+        element: (
+          <>
+            <PageTitle title="Top 100 Anime" />
+            <TopHundredPage />
+          </>
+        ),
       },
     ],
   },
